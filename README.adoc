@@ -10,7 +10,16 @@ A reactive client of https://api.foojay.io/swagger-ui[Foojay Disco API] for Quar
 
 [source,java]
 ----
-// TBD
+import org.l2x6.discotheq.api.DiscoApi;
+import io.quarkus.rest.client.reactive.QuarkusRestClientBuilder;
+
+DiscoApi client = QuarkusRestClientBuilder.newBuilder()
+    .baseUri(URI.create("https://api.foojay.io"))
+    .build(DiscoApi.class);
+
+ApiResponse<DiscoPackage> response = client.packagesAll(null, null).await().indefinitely();
+response.result().forEach(pkg -> System.out.println(pkg.filename()));
+
 ----
 
 == Maven coordinates
