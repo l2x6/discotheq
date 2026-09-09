@@ -1,0 +1,46 @@
+name: verify
+
+on:
+  pull_request
+
+permissions:
+  discussions: read
+  issues: read
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: maven
+
+      - name: mvn install -DskipTests -e -B -ntp
+        shell: bash
+        run: ./mvnw install -e -B -ntp
+
+      - name: Fail on uncommitted changes
+        shell: bash
+        run: |
+          [[ -z $(git status --porcelain) ]] || {
+            echo 'There are uncommitted changes'
+            git status
+            git diff
+            exit 1
+          }
