@@ -1,0 +1,35 @@
+{
+    "result": [
+        {
+            "name": "GLIBC",
+            "ui_string": "glibc",
+            "api_string": "glibc"
+        },
+        {
+            "name": "MUSL",
+            "ui_string": "musl",
+            "api_string": "musl"
+        },
+        {
+            "name": "LIBC",
+            "ui_string": "libc",
+            "api_string": "libc"
+        },
+        {
+            "name": "C_STD_LIB",
+            "ui_string": "c std. lib",
+            "api_string": "c_std_lib"
+        },
+        {
+            "name": "NONE",
+            "ui_string": "-",
+            "api_string": ""
+        },
+        {
+            "name": "NOT_FOUND",
+            "ui_string": "",
+            "api_string": ""
+        }
+    ],
+    "message": "Supported libc types"
+}

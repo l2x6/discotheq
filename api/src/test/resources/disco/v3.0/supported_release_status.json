@@ -1,0 +1,25 @@
+{
+    "result": [
+        {
+            "name": "GA",
+            "ui_string": "General Access",
+            "api_string": "ga"
+        },
+        {
+            "name": "EA",
+            "ui_string": "Early Access",
+            "api_string": "ea"
+        },
+        {
+            "name": "NONE",
+            "ui_string": "-",
+            "api_string": ""
+        },
+        {
+            "name": "NOT_FOUND",
+            "ui_string": "",
+            "api_string": ""
+        }
+    ],
+    "message": "Supported release status"
+}

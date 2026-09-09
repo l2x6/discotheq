@@ -1,0 +1,191 @@
+{
+    "result": [
+        {
+            "ui_string": "Eliya JDK",
+            "api_string": "eliya",
+            "latest_ga": "25.0.3",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "Red Hat",
+            "api_string": "redhat",
+            "latest_ga": "21.0.8+9",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "OJDKBuild",
+            "api_string": "ojdk_build",
+            "latest_ga": "17.0.3",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "GraalVM CE 11",
+            "api_string": "graalvm_ce11",
+            "latest_ga": "22.3.3",
+            "latest_ea": "20-ea"
+        },
+        {
+            "ui_string": "AOJ",
+            "api_string": "aoj",
+            "latest_ga": "16.0.1",
+            "latest_ea": "17-ea"
+        },
+        {
+            "ui_string": "Oracle OpenJDK",
+            "api_string": "oracle_open_jdk",
+            "latest_ga": "26.0.2.1+1",
+            "latest_ea": "28-ea+14"
+        },
+        {
+            "ui_string": "GraalVM Community",
+            "api_string": "graalvm_community",
+            "latest_ga": "25.3.4.1",
+            "latest_ea": "25.4.4.1-ea"
+        },
+        {
+            "ui_string": "Corretto",
+            "api_string": "corretto",
+            "latest_ga": "26.0.2",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "SapMachine",
+            "api_string": "sap_machine",
+            "latest_ga": "26.0.2.1",
+            "latest_ea": "28-ea+14"
+        },
+        {
+            "ui_string": "Mandrel",
+            "api_string": "mandrel",
+            "latest_ga": "25",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "AOJ OpenJ9",
+            "api_string": "aoj_openj9",
+            "latest_ga": "16.0.1",
+            "latest_ea": "17-ea"
+        },
+        {
+            "ui_string": "Liberica Native",
+            "api_string": "liberica_native",
+            "latest_ga": "25.0.4.1+1",
+            "latest_ea": "22.3-ea+1"
+        },
+        {
+            "ui_string": "Liberica",
+            "api_string": "liberica",
+            "latest_ga": "26.0.2.1+1",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "Temurin",
+            "api_string": "temurin",
+            "latest_ga": "26.0.2.1+1",
+            "latest_ea": "28-ea+14"
+        },
+        {
+            "ui_string": "JetBrains",
+            "api_string": "jetbrains",
+            "latest_ga": "25.0.4.1+58348",
+            "latest_ea": "21-ea"
+        },
+        {
+            "ui_string": "Trava",
+            "api_string": "trava",
+            "latest_ga": "11.0.15+1",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "GraalVM CE 8",
+            "api_string": "graalvm_ce8",
+            "latest_ga": "21.3.1",
+            "latest_ea": "20-ea"
+        },
+        {
+            "ui_string": "Semeru certified",
+            "api_string": "semeru_certified",
+            "latest_ga": "25.0.4+7",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "OpenLogic",
+            "api_string": "openlogic",
+            "latest_ga": "25.0.4+7",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "GraalVM CE 16",
+            "api_string": "graalvm_ce16",
+            "latest_ga": "21.2",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "Dragonwell",
+            "api_string": "dragonwell",
+            "latest_ga": "25.0.4",
+            "latest_ea": "11-ea+7"
+        },
+        {
+            "ui_string": "Bi Sheng",
+            "api_string": "bisheng",
+            "latest_ga": "25.0.4+15",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "Zulu",
+            "api_string": "zulu",
+            "latest_ga": "26.0.2.1+1",
+            "latest_ea": "27-ea+32"
+        },
+        {
+            "ui_string": "GraalVM",
+            "api_string": "graalvm",
+            "latest_ga": "25.3.4.1",
+            "latest_ea": "26-ea+13"
+        },
+        {
+            "ui_string": "GraalVM CE 17",
+            "api_string": "graalvm_ce17",
+            "latest_ga": "22.3.3",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "Semeru",
+            "api_string": "semeru",
+            "latest_ga": "26.0.2",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "Oracle",
+            "api_string": "oracle",
+            "latest_ga": "26.0.2",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "Microsoft",
+            "api_string": "microsoft",
+            "latest_ga": "25.0.4.1",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "Gluon GraalVM",
+            "api_string": "gluon_graalvm",
+            "latest_ga": "23+25",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "GraalVM CE 19",
+            "api_string": "graalvm_ce19",
+            "latest_ga": "22.3.1",
+            "latest_ea": ""
+        },
+        {
+            "ui_string": "Kona",
+            "api_string": "kona",
+            "latest_ga": "25.0.4+1",
+            "latest_ea": "17-ea+1"
+        }
+    ],
+    "message": ""
+}

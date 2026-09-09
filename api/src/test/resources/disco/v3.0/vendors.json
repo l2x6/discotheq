@@ -1,0 +1,77 @@
+{
+    "result": [
+        {
+            "ui_string": "AdoptOpenJDK",
+            "api_string": "adopt_open_jdk"
+        },
+        {
+            "ui_string": "Alibaba",
+            "api_string": "alibaba"
+        },
+        {
+            "ui_string": "Amazon",
+            "api_string": "amazon"
+        },
+        {
+            "ui_string": "Asymm Systems",
+            "api_string": "asymm"
+        },
+        {
+            "ui_string": "Azul",
+            "api_string": "azul"
+        },
+        {
+            "ui_string": "BellSoft",
+            "api_string": "bell_soft"
+        },
+        {
+            "ui_string": "Community",
+            "api_string": "community"
+        },
+        {
+            "ui_string": "Eclipse Foundation",
+            "api_string": "eclipse_foundation"
+        },
+        {
+            "ui_string": "Gluon",
+            "api_string": "gluon"
+        },
+        {
+            "ui_string": "Huawei",
+            "api_string": "huawei"
+        },
+        {
+            "ui_string": "IBM",
+            "api_string": "ibm"
+        },
+        {
+            "ui_string": "JetBrains",
+            "api_string": "jetbrains"
+        },
+        {
+            "ui_string": "Microsoft",
+            "api_string": "microsoft"
+        },
+        {
+            "ui_string": "Oracle",
+            "api_string": "oracle"
+        },
+        {
+            "ui_string": "OpenLogic",
+            "api_string": "open_logic"
+        },
+        {
+            "ui_string": "Red Hat",
+            "api_string": "red_hat"
+        },
+        {
+            "ui_string": "SAP",
+            "api_string": "sap"
+        },
+        {
+            "ui_string": "Tencent",
+            "api_string": "tencent"
+        }
+    ],
+    "message": ""
+}

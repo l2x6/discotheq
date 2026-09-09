@@ -1,0 +1,36 @@
+{
+    "result": [
+        {
+            "id": "89e929798c69bb09512d7f655469018f",
+            "archive_type": "dmg",
+            "distribution": "zulu",
+            "major_version": 26,
+            "java_version": "26.0.2.1+1",
+            "distribution_version": "26.32.203",
+            "jdk_version": 26,
+            "latest_build_available": true,
+            "release_status": "ga",
+            "term_of_support": "sts",
+            "operating_system": "macos",
+            "lib_c_type": "libc",
+            "architecture": "x64",
+            "fpu": "unknown",
+            "package_type": "jdk",
+            "javafx_bundled": true,
+            "directly_downloadable": true,
+            "filename": "zulu26.32.203-ca-fx-jdk26.0.2.1-macosx_x64.dmg",
+            "links": {
+                "pkg_info_uri": "https://api.foojay.io/disco/v3.0/ids/89e929798c69bb09512d7f655469018f",
+                "pkg_download_redirect": "https://api.foojay.io/disco/v3.0/ids/89e929798c69bb09512d7f655469018f/redirect"
+            },
+            "free_use_in_production": true,
+            "tck_tested": "yes",
+            "tck_cert_uri": "https://cdn.azul.com/zulu/pdf/cert.zulu26.32.203-ca-fx-jdk26.0.2.1-macosx_x64.dmg.pdf",
+            "aqavit_certified": "unknown",
+            "aqavit_cert_uri": "",
+            "size": 338567802,
+            "feature": []
+        }
+    ],
+    "message": ""
+}

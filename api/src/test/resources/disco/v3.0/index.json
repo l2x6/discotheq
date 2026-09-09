@@ -1,0 +1,20 @@
+{
+    "result": [
+        {
+            "uri": "https://api.foojay.io/disco/v3.0/parameters"
+        },
+        {
+            "uri": "https://api.foojay.io/disco/v3.0/packages"
+        },
+        {
+            "uri": "https://api.foojay.io/disco/v3.0/major_versions"
+        },
+        {
+            "uri": "https://api.foojay.io/disco/v3.0/ids"
+        },
+        {
+            "uri": "https://api.foojay.io/disco/v3.0/distributions"
+        }
+    ],
+    "message": "Endpoints v3.0"
+}

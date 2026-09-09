@@ -1,0 +1,38 @@
+{
+    "result": [
+        {
+            "packages": {
+                "architecture": "aarch64,aarch32,arm64,arm32,arm,armhf,armel,mips,mipsel,ppc64le,ppc64,ppc,riscv64,s390x,sparcv9,sparc,x64,x32,i386,i386,i386,x86_64,x86,amd64,ia64",
+                "archive_type": "apk,bin,cab,deb,dmg,msi,pkg,rpm,src_tar,tar.gz,tar.xz,tap.zip,tar,tgz,tar.z,zip,exe",
+                "bitness": "32,64",
+                "fpu": "hard_float,soft_float,unknown",
+                "directly_downloadable": "true,false",
+                "distro": "aoj,aoj_openj9,bisheng,corretto,debian,dragonwell,eliya,gluon_graalvm,graalvm_ce8,graalvm_ce11,graalvm_ce16,graalvm_ce17,graalvm_ce19,graalvm_ce20,graalvm_community,graalvm,jetbrains,kona,liberica,liberica_native,mandrel,microsoft,ojdk_build,openlogic,oracle_open_jdk,oracle,redhat,sap_machine,semeru,semeru_certified,temurin,trava,zulu,zulu_prime",
+                "feature": "loom,panama,lanai,valhalla,kona_fiber,crac",
+                "javafx_bundled": "true,false",
+                "with_javafx_if_available": "true,false",
+                "latest": "all_of_version,overall,per_distro,per_version,available",
+                "lib_c_type": "glibc,musl,libc,c_std_lib",
+                "major_version": "29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,31,30",
+                "operating_system": "linux,free_bsd,macos,windows,solaris,qnx,aix",
+                "package_type": "jdk,jre",
+                "release_status": "ga,ea",
+                "term_of_support": "sts,mts,lts",
+                "free_use_in_production": "true,false",
+                "checksum_type": "md5,sha1,sha256,sha224,sha384,sha512,sha3_256",
+                "version": "feature.interim.update.patch"
+            },
+            "major_versions": {
+                "ea": "true,false",
+                "maintained": "true,false"
+            },
+            "distributions": {
+                "discovery_scope_id": "public,build_of_openjdk,directly_downloadable,not_directly_downloadable"
+            },
+            "ids": {
+                "token": "test"
+            }
+        }
+    ],
+    "message": "url parameter for different endpoints"
+}

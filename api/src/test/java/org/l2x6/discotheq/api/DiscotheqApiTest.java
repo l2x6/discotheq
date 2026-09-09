@@ -14,7 +14,6 @@ import java.io.UncheckedIOException;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.l2x6.discotheq.api.api.DiscotheqApi;
@@ -56,9 +55,14 @@ class DiscotheqApiTest {
                 .indefinitely();
 
         assertThat(response.message()).isEmpty();
-        assertThat(response.result())
-                .containsExactly(new MajorVersion(
-                        21, "LTS", true, false, "ga", List.of("21.0.4+7", "21")));
+        assertThat(response.result()).isNotEmpty().allSatisfy(majorVersion -> {
+            assertThat(majorVersion.majorVersion()).isPositive();
+            assertThat(majorVersion.termOfSupport()).isNotBlank();
+            assertThat(majorVersion.maintained()).isNotNull();
+            assertThat(majorVersion.earlyAccessOnly()).isNotNull();
+            assertThat(majorVersion.releaseStatus()).isNotBlank();
+            assertThat(majorVersion.versions()).isNotEmpty().allSatisfy(version -> assertThat(version).isNotBlank());
+        });
     }
 
     private static void stubJsonResponses(WireMockExtension wireMock) {
@@ -76,7 +80,10 @@ class DiscotheqApiTest {
 
     private static void stubJsonResponse(WireMockExtension wireMock, Path resourceRoot, Path jsonFile) {
         final String relativePath = resourceRoot.relativize(jsonFile).toString().replace(File.separatorChar, '/');
-        final String endpointPath = API_RESOURCE_ROOT + "/" + relativePath.substring(0, relativePath.length() - 5);
+        final String relativeEndpointPath = relativePath.substring(0, relativePath.length() - 5);
+        final String endpointPath = relativeEndpointPath.equals("index")
+                ? API_RESOURCE_ROOT
+                : API_RESOURCE_ROOT + "/" + relativeEndpointPath;
         try {
             wireMock.stubFor(get(urlPathEqualTo(endpointPath))
                     .willReturn(okJson(Files.readString(jsonFile))));

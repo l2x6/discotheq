@@ -1,0 +1,167 @@
+{
+    "result": [
+        {
+            "name": "AARCH64",
+            "ui_string": "AARCH64",
+            "api_string": "aarch64",
+            "bitness": "64"
+        },
+        {
+            "name": "AARCH32",
+            "ui_string": "AARCH32",
+            "api_string": "aarch32",
+            "bitness": "32"
+        },
+        {
+            "name": "ARM64",
+            "ui_string": "ARM64",
+            "api_string": "arm64",
+            "bitness": "64"
+        },
+        {
+            "name": "ARM32",
+            "ui_string": "ARM32",
+            "api_string": "arm32",
+            "bitness": "32"
+        },
+        {
+            "name": "ARM",
+            "ui_string": "ARM",
+            "api_string": "arm",
+            "bitness": "32"
+        },
+        {
+            "name": "ARMHF",
+            "ui_string": "ARMHF",
+            "api_string": "armhf",
+            "bitness": "32"
+        },
+        {
+            "name": "ARMEL",
+            "ui_string": "ARMEL",
+            "api_string": "armel",
+            "bitness": "32"
+        },
+        {
+            "name": "MIPS",
+            "ui_string": "MIPS",
+            "api_string": "mips",
+            "bitness": "32"
+        },
+        {
+            "name": "MIPSEL",
+            "ui_string": "MIPS EL",
+            "api_string": "mipsel",
+            "bitness": "32"
+        },
+        {
+            "name": "PPC64LE",
+            "ui_string": "PPC64LE",
+            "api_string": "ppc64le",
+            "bitness": "64"
+        },
+        {
+            "name": "PPC64",
+            "ui_string": "PPC64",
+            "api_string": "ppc64",
+            "bitness": "64"
+        },
+        {
+            "name": "PPC",
+            "ui_string": "Power PC",
+            "api_string": "ppc",
+            "bitness": "32"
+        },
+        {
+            "name": "RISCV64",
+            "ui_string": "RISCv64",
+            "api_string": "riscv64",
+            "bitness": "64"
+        },
+        {
+            "name": "S390X",
+            "ui_string": "S390X",
+            "api_string": "s390x",
+            "bitness": "64"
+        },
+        {
+            "name": "SPARCV9",
+            "ui_string": "Sparc V9",
+            "api_string": "sparcv9",
+            "bitness": "64"
+        },
+        {
+            "name": "SPARC",
+            "ui_string": "Sparc",
+            "api_string": "sparc",
+            "bitness": "32"
+        },
+        {
+            "name": "X64",
+            "ui_string": "X64",
+            "api_string": "x64",
+            "bitness": "64"
+        },
+        {
+            "name": "X32",
+            "ui_string": "X32",
+            "api_string": "x32",
+            "bitness": "32"
+        },
+        {
+            "name": "I386",
+            "ui_string": "I386",
+            "api_string": "i386",
+            "bitness": "32"
+        },
+        {
+            "name": "I586",
+            "ui_string": "I586",
+            "api_string": "i386",
+            "bitness": "32"
+        },
+        {
+            "name": "I686",
+            "ui_string": "I686",
+            "api_string": "i386",
+            "bitness": "32"
+        },
+        {
+            "name": "X86_64",
+            "ui_string": "X86_64",
+            "api_string": "x86_64",
+            "bitness": "64"
+        },
+        {
+            "name": "X86",
+            "ui_string": "X86",
+            "api_string": "x86",
+            "bitness": "32"
+        },
+        {
+            "name": "AMD64",
+            "ui_string": "AMD64",
+            "api_string": "amd64",
+            "bitness": "64"
+        },
+        {
+            "name": "IA64",
+            "ui_string": "IA-64",
+            "api_string": "ia64",
+            "bitness": "64"
+        },
+        {
+            "name": "NONE",
+            "ui_string": "-",
+            "api_string": "",
+            "bitness": ""
+        },
+        {
+            "name": "NOT_FOUND",
+            "ui_string": "",
+            "api_string": "",
+            "bitness": ""
+        }
+    ],
+    "message": "Supported architectures"
+}

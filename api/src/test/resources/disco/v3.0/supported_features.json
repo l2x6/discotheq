@@ -1,0 +1,35 @@
+{
+    "result": [
+        {
+            "name": "LOOM",
+            "ui_string": "Loom",
+            "api_string": "loom"
+        },
+        {
+            "name": "PANAMA",
+            "ui_string": "Panama",
+            "api_string": "panama"
+        },
+        {
+            "name": "LANAI",
+            "ui_string": "Lanai",
+            "api_string": "lanai"
+        },
+        {
+            "name": "VALHALLA",
+            "ui_string": "Valhalla",
+            "api_string": "valhalla"
+        },
+        {
+            "name": "KONA_FIBER",
+            "ui_string": "KonaFiber",
+            "api_string": "kona_fiber"
+        },
+        {
+            "name": "CRAC",
+            "ui_string": "CRaC",
+            "api_string": "crac"
+        }
+    ],
+    "message": "Supported features"
+}

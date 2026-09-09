@@ -1,0 +1,9 @@
+{
+    "result": [
+        {
+            "days_to_next_release": 6,
+            "date_of_next_release": "15.09.2026"
+        }
+    ],
+    "message": "Next release in 6 days at 15.09.2026"
+}

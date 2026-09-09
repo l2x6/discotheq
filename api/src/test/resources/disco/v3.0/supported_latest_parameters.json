@@ -1,0 +1,40 @@
+{
+    "result": [
+        {
+            "name": "ALL_OF_VERSION",
+            "ui_string": "all of version",
+            "api_string": "all_of_version"
+        },
+        {
+            "name": "OVERALL",
+            "ui_string": "overall",
+            "api_string": "overall"
+        },
+        {
+            "name": "PER_DISTRIBUTION",
+            "ui_string": "per distribution",
+            "api_string": "per_distro"
+        },
+        {
+            "name": "PER_VERSION",
+            "ui_string": "per version",
+            "api_string": "per_version"
+        },
+        {
+            "name": "AVAILABLE",
+            "ui_string": "available",
+            "api_string": "available"
+        },
+        {
+            "name": "NONE",
+            "ui_string": "-",
+            "api_string": ""
+        },
+        {
+            "name": "NOT_FOUND",
+            "ui_string": "",
+            "api_string": ""
+        }
+    ],
+    "message": "Supported latest parameters"
+}

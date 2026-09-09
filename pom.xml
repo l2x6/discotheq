@@ -320,6 +320,7 @@
                                 <exclude>mvnw.cmd</exclude>
                                 <exclude>.sdkmanrc</exclude>
                                 <exclude>src/main/openapi/foojay.yml</exclude>
+                                <exclude>src/test/resources/disco/v3.0/**</exclude>
                             </excludes>
                         </licenseSet>
                     </licenseSets>

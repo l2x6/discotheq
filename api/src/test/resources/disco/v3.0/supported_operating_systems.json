@@ -1,0 +1,71 @@
+{
+    "result": [
+        {
+            "name": "ALPINE_LINUX",
+            "ui_string": "Alpine Linux",
+            "api_string": "linux",
+            "lib_c_type": "musl"
+        },
+        {
+            "name": "LINUX_MUSL",
+            "ui_string": "Linux Musl",
+            "api_string": "linux",
+            "lib_c_type": "musl"
+        },
+        {
+            "name": "LINUX",
+            "ui_string": "Linux",
+            "api_string": "linux",
+            "lib_c_type": "glibc"
+        },
+        {
+            "name": "FREE_BSD",
+            "ui_string": "FreeBSD",
+            "api_string": "free_bsd",
+            "lib_c_type": "libc"
+        },
+        {
+            "name": "MACOS",
+            "ui_string": "Mac OS",
+            "api_string": "macos",
+            "lib_c_type": "libc"
+        },
+        {
+            "name": "WINDOWS",
+            "ui_string": "Windows",
+            "api_string": "windows",
+            "lib_c_type": "c_std_lib"
+        },
+        {
+            "name": "SOLARIS",
+            "ui_string": "Solaris",
+            "api_string": "solaris",
+            "lib_c_type": "libc"
+        },
+        {
+            "name": "QNX",
+            "ui_string": "QNX",
+            "api_string": "qnx",
+            "lib_c_type": "libc"
+        },
+        {
+            "name": "AIX",
+            "ui_string": "AIX",
+            "api_string": "aix",
+            "lib_c_type": "libc"
+        },
+        {
+            "name": "NONE",
+            "ui_string": "-",
+            "api_string": "",
+            "lib_c_type": ""
+        },
+        {
+            "name": "NOT_FOUND",
+            "ui_string": "",
+            "api_string": "",
+            "lib_c_type": ""
+        }
+    ],
+    "message": "Supported operating systems"
+}

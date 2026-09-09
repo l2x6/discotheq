@@ -1,0 +1,26 @@
+{
+    "result": [
+        {
+            "major_version": 26,
+            "term_of_support": "STS",
+            "maintained": true,
+            "early_access_only": false,
+            "release_status": "ga",
+            "versions": [
+                "26.0.2.1+1",
+                "26.0.2.1",
+                "26.0.2+13",
+                "26.0.2+10",
+                "26.0.2",
+                "26.0.1+10",
+                "26.0.1+8",
+                "26.0.1",
+                "26+37",
+                "26+35",
+                "26+34",
+                "26"
+            ]
+        }
+    ],
+    "message": ""
+}

@@ -1,0 +1,25 @@
+{
+    "result": [
+        {
+            "name": "JDK",
+            "ui_string": "JDK",
+            "api_string": "jdk"
+        },
+        {
+            "name": "JRE",
+            "ui_string": "JRE",
+            "api_string": "jre"
+        },
+        {
+            "name": "NONE",
+            "ui_string": "-",
+            "api_string": ""
+        },
+        {
+            "name": "NOT_FOUND",
+            "ui_string": "",
+            "api_string": ""
+        }
+    ],
+    "message": "Supported package types"
+}

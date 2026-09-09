@@ -1,0 +1,100 @@
+{
+    "result": [
+        {
+            "name": "APK",
+            "ui_string": "apk",
+            "api_string": "apk"
+        },
+        {
+            "name": "BIN",
+            "ui_string": "bin",
+            "api_string": "bin"
+        },
+        {
+            "name": "CAB",
+            "ui_string": "cab",
+            "api_string": "cab"
+        },
+        {
+            "name": "DEB",
+            "ui_string": "deb",
+            "api_string": "deb"
+        },
+        {
+            "name": "DMG",
+            "ui_string": "dmg",
+            "api_string": "dmg"
+        },
+        {
+            "name": "MSI",
+            "ui_string": "msi",
+            "api_string": "msi"
+        },
+        {
+            "name": "PKG",
+            "ui_string": "pkg",
+            "api_string": "pkg"
+        },
+        {
+            "name": "RPM",
+            "ui_string": "rpm",
+            "api_string": "rpm"
+        },
+        {
+            "name": "SRC_TAR",
+            "ui_string": "src.tar.gz",
+            "api_string": "src_tar"
+        },
+        {
+            "name": "TAR_GZ",
+            "ui_string": "tar.gz",
+            "api_string": "tar.gz"
+        },
+        {
+            "name": "TAR_XZ",
+            "ui_string": "tar.xz",
+            "api_string": "tar.xz"
+        },
+        {
+            "name": "TAP_ZIP",
+            "ui_string": "tap.zip",
+            "api_string": "tap.zip"
+        },
+        {
+            "name": "TAR",
+            "ui_string": "tar",
+            "api_string": "tar"
+        },
+        {
+            "name": "TGZ",
+            "ui_string": "tgz",
+            "api_string": "tgz"
+        },
+        {
+            "name": "TAR_Z",
+            "ui_string": "tar.Z",
+            "api_string": "tar.z"
+        },
+        {
+            "name": "ZIP",
+            "ui_string": "zip",
+            "api_string": "zip"
+        },
+        {
+            "name": "EXE",
+            "ui_string": "exe",
+            "api_string": "exe"
+        },
+        {
+            "name": "NONE",
+            "ui_string": "-",
+            "api_string": ""
+        },
+        {
+            "name": "NOT_FOUND",
+            "ui_string": "",
+            "api_string": ""
+        }
+    ],
+    "message": "Supported archive types"
+}

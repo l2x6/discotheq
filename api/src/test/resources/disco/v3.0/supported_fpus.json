@@ -1,0 +1,30 @@
+{
+    "result": [
+        {
+            "name": "HARD_FLOAT",
+            "ui_string": "hardfloat",
+            "api_string": "hard_float"
+        },
+        {
+            "name": "SOFT_FLOAT",
+            "ui_string": "softfloat",
+            "api_string": "soft_float"
+        },
+        {
+            "name": "UNKNOWN",
+            "ui_string": "unknown",
+            "api_string": "unknown"
+        },
+        {
+            "name": "NONE",
+            "ui_string": "-",
+            "api_string": ""
+        },
+        {
+            "name": "NOT_FOUND",
+            "ui_string": "",
+            "api_string": ""
+        }
+    ],
+    "message": "Supported floating point types"
+}

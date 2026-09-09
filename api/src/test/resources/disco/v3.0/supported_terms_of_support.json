@@ -1,0 +1,30 @@
+{
+    "result": [
+        {
+            "name": "STS",
+            "ui_string": "short term stable",
+            "api_string": "sts"
+        },
+        {
+            "name": "MTS",
+            "ui_string": "mid term stable",
+            "api_string": "mts"
+        },
+        {
+            "name": "LTS",
+            "ui_string": "long term stable",
+            "api_string": "lts"
+        },
+        {
+            "name": "NONE",
+            "ui_string": "-",
+            "api_string": ""
+        },
+        {
+            "name": "NOT_FOUND",
+            "ui_string": "",
+            "api_string": ""
+        }
+    ],
+    "message": "Supported terms of support"
+}
