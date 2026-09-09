@@ -1,0 +1,28 @@
+= Discotheq
+
+https://github.com/l2x6/discotheq/blob/main/LICENSE[image:https://img.shields.io/github/license/l2x6/discotheq.svg[License]]
+https://central.sonatype.com/artifact/org.l2x6/discotheq[image:https://img.shields.io/maven-central/v/org.l2x6.discotheq/discotheq.svg[Maven
+Central]]
+
+A reactive client of https://api.foojay.io/swagger-ui[Foojay Disco API] for Quarkus
+
+== How to use
+
+[source,java]
+----
+// TBD
+----
+
+== Maven coordinates
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.l2x6.discotheq</groupId>
+  <artifactId>discotheq-api</artifactId>
+  <version><!-- Use the latest --></version>
+</dependency>
+----
+
+Find the latest version on https://central.sonatype.com/artifact/org.l2x6.discotheq/discotheq/versions[Maven Central].
+
