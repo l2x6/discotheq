@@ -125,50 +125,50 @@ class DiscoApiTest {
     };
 
     @Test
-    void getAllMajorVersionsV3() {
-        final MajorVersion first = first(client().getAllMajorVersionsV3(null, null, null, null, null, null, null)
+    void majorVersions() {
+        final MajorVersion first = first(client().majorVersions(null, null, null, null, null, null, null)
                 .await().indefinitely(), "", 21, DiscoApiTest::isValidMajorVersion);
         assertMajorVersion(first, 26, "STS", true, false, "ga", 12, "26.0.2.1+1", "26",
                 "5b5b91120a81de58c540defb46dd1198304142fa15adceecd7ceb23eaf183414");
     }
 
     @Test
-    void getAllPackagesGraalVMV3() {
-        assertThat(first(client().getAllPackagesGraalVMV3(null, null).await().indefinitely(), "", 1_171,
+    void packagesAllBuildsOfGraalvm() {
+        assertThat(first(client().packagesAllBuildsOfGraalvm(null, null).await().indefinitely(), "", 1_171,
                 DiscoApiTest::isValidPackage)).isEqualTo(GRAALVM_JDK);
     }
 
     @Test
-    void getAllPackagesOpenJDKV3() {
-        assertThat(first(client().getAllPackagesOpenJDKV3(null, null).await().indefinitely(), "", 1_141,
+    void packagesAllBuildsOfOpenjdk() {
+        assertThat(first(client().packagesAllBuildsOfOpenjdk(null, null).await().indefinitely(), "", 1_141,
                 DiscoApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
     }
 
     @Test
-    void getAllPackagesV3() {
-        assertThat(first(client().getAllPackagesV3(null, null).await().indefinitely(), "", 1_145,
+    void packagesAll() {
+        assertThat(first(client().packagesAll(null, null).await().indefinitely(), "", 1_145,
                 DiscoApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
     }
 
     @Test
-    void getDaysSinceLastRelease() {
-        assertThat(first(client().getDaysSinceLastRelease().await().indefinitely(),
+    void daysSinceRelease() {
+        assertThat(first(client().daysSinceRelease().await().indefinitely(),
                 "Next release in 176 days at 17.03.2026", 1,
                 value -> value != null && value.daysSinceLastRelease() >= 0 && hasText(value.dateSinceLastRelease())))
                 .isEqualTo(new DaysSinceRelease(176, "17.03.2026"));
     }
 
     @Test
-    void getDaysSinceLastUpdate() {
-        assertThat(first(client().getDaysSinceLastUpdate().await().indefinitely(),
+    void daysSinceUpdate() {
+        assertThat(first(client().daysSinceUpdate().await().indefinitely(),
                 "Next update in 50 days at 21.07.2026", 1,
                 value -> value != null && value.daysSinceLastUpdate() >= 0 && hasText(value.dateSinceLastUpdate())))
                 .isEqualTo(new DaysSinceUpdate(50, "21.07.2026"));
     }
 
     @Test
-    void getDistributionV3() {
-        final Distribution first = first(client().getDistributionV3("temurin", null, null, null, null, null, null, null)
+    void distributionsDistroName() {
+        final Distribution first = first(client().distributionsDistroName("temurin", null, null, null, null, null, null, null)
                 .await().indefinitely(), "", 1, DiscoApiTest::isValidDistribution);
         assertDistribution(first, "Temurin", "temurin", "eclipse_foundation", true, true, true, false,
                 "https://adoptium.net/temurin/releases", null, null, null, null,
@@ -177,8 +177,8 @@ class DiscoApiTest {
     }
 
     @Test
-    void getDistributionsForGivenVersionV3() {
-        final Distribution first = first(client().getDistributionsForGivenVersionV3("21", null, null, null, null)
+    void distributionsVersionsVersion() {
+        final Distribution first = first(client().distributionsVersionsVersion("21", null, null, null, null)
                 .await().indefinitely(), "", 15, DiscoApiTest::isValidDistribution);
         assertDistribution(first, "Zulu", "zulu", "azul", true, true, true, false,
                 "https://www.azul.com/downloads/?package=jdk", null, null, null, null,
@@ -187,8 +187,8 @@ class DiscoApiTest {
     }
 
     @Test
-    void getDistributionsV3() {
-        final Distribution first = first(client().getDistributionsV3(null, null, null).await().indefinitely(), "", 31,
+    void distributions() {
+        final Distribution first = first(client().distributions(null, null, null).await().indefinitely(), "", 31,
                 DiscoApiTest::isValidDistribution);
         assertDistribution(first, "Zulu", "zulu", "azul", true, true, true, false,
                 "https://www.azul.com/downloads/?package=jdk", 12, "zulu", "Zulu Core",
@@ -198,47 +198,47 @@ class DiscoApiTest {
     }
 
     @Test
-    void getJDKPackagesV3() {
-        assertThat(first(client().getJDKPackagesV3(
+    void packagesJdks() {
+        assertThat(first(client().packagesJdks(
                 null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
                 null, null, null, null).await().indefinitely(), "33583 package(s) found", 1_141,
                 DiscoApiTest::isValidPackage)).isEqualTo(ZULU_JDK);
     }
 
     @Test
-    void getJREPackagesV3() {
-        assertThat(first(client().getJREPackagesV3(
+    void packagesJres() {
+        assertThat(first(client().packagesJres(
                 null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
                 null, null, null).await().indefinitely(), "19314 package(s) found", 1_136,
                 DiscoApiTest::isValidPackage)).isEqualTo(ZULU_JRE);
     }
 
     @Test
-    void getLatestVersionPerDistributionV3() {
-        assertThat(first(client().getLatestVersionPerDistributionV3(null, null).await().indefinitely(), "", 31,
+    void distributionsVersionsLatest() {
+        assertThat(first(client().distributionsVersionsLatest(null, null).await().indefinitely(), "", 31,
                 DiscoApiTest::isValidLatestDistributionVersion))
                 .isEqualTo(new LatestDistributionVersion("Eliya JDK", "eliya", "25.0.3", ""));
     }
 
     @Test
-    void getMajorVersionV3() {
-        final MajorVersion first = first(client().getMajorVersionV3("latest_ga", null, null).await().indefinitely(),
+    void majorVersionsQuery() {
+        final MajorVersion first = first(client().majorVersionsQuery("latest_ga", null, null).await().indefinitely(),
                 "", 1, DiscoApiTest::isValidMajorVersion);
         assertMajorVersion(first, 26, "STS", true, false, "ga", 12, "26.0.2.1+1", "26",
                 "5b5b91120a81de58c540defb46dd1198304142fa15adceecd7ceb23eaf183414");
     }
 
     @Test
-    void getMajorVersionsNew() {
-        final MajorVersion first = first(client().getMajorVersionsNew(null, null, null, null, null, null)
+    void majorVersions1() {
+        final MajorVersion first = first(client().majorVersions1(null, null, null, null, null, null)
                 .await().indefinitely(), "", 26, DiscoApiTest::isValidMajorVersion);
         assertMajorVersion(first, 31, "STS", false, true, "ea", 0, null, null,
                 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
     }
 
     @Test
-    void getPackageRedirectV3() {
-        try (Response response = client().getPackageRedirectV3(PACKAGE_ID).await().indefinitely()) {
+    void idsPkgIdRedirect() {
+        try (Response response = client().idsPkgIdRedirect(PACKAGE_ID).await().indefinitely()) {
             assertThat(response.getStatus()).isEqualTo(301);
             assertThat(response.getHeaderString("Location")).isEqualTo(
                     "https://cdn.azul.com/zulu/bin/zulu26.32.203-ca-fx-jdk26.0.2.1-macosx_x64.dmg");
@@ -246,137 +246,137 @@ class DiscoApiTest {
     }
 
     @Test
-    void getPackageV3() {
-        assertThat(first(client().getPackageV3(PACKAGE_ID).await().indefinitely(), "", 1,
+    void packagesId() {
+        assertThat(first(client().packagesId(PACKAGE_ID).await().indefinitely(), "", 1,
                 DiscoApiTest::isValidPackage)).isEqualTo(ZULU_JDK);
     }
 
     @Test
-    void getPackagesV3() {
-        assertThat(first(client().getPackagesV3(
+    void packages() {
+        assertThat(first(client().packages(
                 null, null, null, null, null, null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null, null, null, null, null, null)
                 .await().indefinitely(), "", 1_145, DiscoApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
     }
 
     @Test
-    void getParametersV3() {
-        assertThat(first(client().getParametersV3().await().indefinitely(),
+    void parameters() {
+        assertThat(first(client().parameters().await().indefinitely(),
                 "url parameter for different endpoints", 1, value -> value != null)).isEqualTo(PARAMETERS);
     }
 
     @Test
-    void getRemainingDaysToNextRelease() {
-        assertThat(first(client().getRemainingDaysToNextRelease().await().indefinitely(),
+    void remainingDaysRelease() {
+        assertThat(first(client().remainingDaysRelease().await().indefinitely(),
                 "Next release in 6 days at 15.09.2026", 1,
                 value -> value != null && value.daysToNextRelease() >= 0 && hasText(value.dateOfNextRelease())))
                 .isEqualTo(new RemainingDaysToRelease(6, "15.09.2026"));
     }
 
     @Test
-    void getRemainingDaysToNextUpdate() {
-        assertThat(first(client().getRemainingDaysToNextUpdate().await().indefinitely(),
+    void remainingDaysUpdate() {
+        assertThat(first(client().remainingDaysUpdate().await().indefinitely(),
                 "Next update in 41 days at 20.10.2026", 1,
                 value -> value != null && value.daysToNextUpdate() >= 0 && hasText(value.dateOfNextUpdate())))
                 .isEqualTo(new RemainingDaysToUpdate(41, "20.10.2026"));
     }
 
     @Test
-    void getSpecificMajorVersionIncludingEaV3() {
-        final MajorVersion first = first(client().getSpecificMajorVersionIncludingEaV3(21, null, null)
+    void majorVersionsMajorVersionEa() {
+        final MajorVersion first = first(client().majorVersionsMajorVersionEa(21, null, null)
                 .await().indefinitely(), "", 1, DiscoApiTest::isValidMajorVersion);
         assertMajorVersion(first, 21, "LTS", true, false, "ga", 292, "21.0.13-ea+5", "21-ea",
                 "95ff73048042a47cd3430be2e5904303881ead0a8261733150356a84088ea6e5");
     }
 
     @Test
-    void getSpecificMajorVersionV3() {
-        final MajorVersion first = first(client().getSpecificMajorVersionV3(21, null, null)
+    void majorVersionsMajorVersionGa() {
+        final MajorVersion first = first(client().majorVersionsMajorVersionGa(21, null, null)
                 .await().indefinitely(), "", 1, DiscoApiTest::isValidMajorVersion);
         assertMajorVersion(first, 21, "LTS", true, false, "ga", 152, "21.0.12.1+2", "21",
                 "aba61be4e89e01b2c16bc20ebf0c7e4d592d7fa550cc45d31b9b2b14c3e1b93c");
     }
 
     @Test
-    void getSupportedArchitectures() {
-        assertThat(first(client().getSupportedArchitectures().await().indefinitely(), "Supported architectures", 27,
+    void supportedArchitectures() {
+        assertThat(first(client().supportedArchitectures().await().indefinitely(), "Supported architectures", 27,
                 DiscoApiTest::isValidArchitecture))
                 .isEqualTo(new Architecture("AARCH64", "AARCH64", "aarch64", "64"));
     }
 
     @Test
-    void getSupportedArchiveTypes() {
-        assertThat(first(client().getSupportedArchiveTypes().await().indefinitely(), "Supported archive types", 19,
+    void supportedArchiveTypes() {
+        assertThat(first(client().supportedArchiveTypes().await().indefinitely(), "Supported archive types", 19,
                 DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("APK", "apk", "apk"));
     }
 
     @Test
-    void getSupportedFeatures() {
-        assertThat(first(client().getSupportedFeatures().await().indefinitely(), "Supported features", 6,
+    void supportedFeatures() {
+        assertThat(first(client().supportedFeatures().await().indefinitely(), "Supported features", 6,
                 DiscoApiTest::isValidFeature))
                 .isEqualTo(new Feature("LOOM", "Loom", "loom"));
     }
 
     @Test
-    void getSupportedFpus() {
-        assertThat(first(client().getSupportedFpus().await().indefinitely(), "Supported floating point types", 5,
+    void supportedFpus() {
+        assertThat(first(client().supportedFpus().await().indefinitely(), "Supported floating point types", 5,
                 DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("HARD_FLOAT", "hardfloat", "hard_float"));
     }
 
     @Test
-    void getSupportedLatestParameters() {
-        assertThat(first(client().getSupportedLatestParameters().await().indefinitely(),
+    void supportedLatestParameters() {
+        assertThat(first(client().supportedLatestParameters().await().indefinitely(),
                 "Supported latest parameters", 7, DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("ALL_OF_VERSION", "all of version", "all_of_version"));
     }
 
     @Test
-    void getSupportedLibCTypes() {
-        assertThat(first(client().getSupportedLibCTypes().await().indefinitely(), "Supported libc types", 6,
+    void supportedLibCTypes() {
+        assertThat(first(client().supportedLibCTypes().await().indefinitely(), "Supported libc types", 6,
                 DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("GLIBC", "glibc", "glibc"));
     }
 
     @Test
-    void getSupportedOperatingSystems() {
-        assertThat(first(client().getSupportedOperatingSystems().await().indefinitely(),
+    void supportedOperatingSystems() {
+        assertThat(first(client().supportedOperatingSystems().await().indefinitely(),
                 "Supported operating systems", 11, DiscoApiTest::isValidOperatingSystem))
                 .isEqualTo(new OperatingSystem("ALPINE_LINUX", "Alpine Linux", "linux", "musl"));
     }
 
     @Test
-    void getSupportedPackageTypes() {
-        assertThat(first(client().getSupportedPackageTypes().await().indefinitely(), "Supported package types", 4,
+    void supportedPackageTypes() {
+        assertThat(first(client().supportedPackageTypes().await().indefinitely(), "Supported package types", 4,
                 DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("JDK", "JDK", "jdk"));
     }
 
     @Test
-    void getSupportedReleaseStatus() {
-        assertThat(first(client().getSupportedReleaseStatus().await().indefinitely(), "Supported release status", 4,
+    void supportedReleaseStatus() {
+        assertThat(first(client().supportedReleaseStatus().await().indefinitely(), "Supported release status", 4,
                 DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("GA", "General Access", "ga"));
     }
 
     @Test
-    void getSupportedTermsOfSupport() {
-        assertThat(first(client().getSupportedTermsOfSupport().await().indefinitely(),
+    void supportedTermsOfSupport() {
+        assertThat(first(client().supportedTermsOfSupport().await().indefinitely(),
                 "Supported terms of support", 5, DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("STS", "short term stable", "sts"));
     }
 
     @Test
-    void getUpcomingReleases() {
-        assertThat(first(client().getUpcomingReleases().await().indefinitely(), "", 1,
+    void upcomingReleases() {
+        assertThat(first(client().upcomingReleases().await().indefinitely(), "", 1,
                 DiscoApiTest::isValidUpcomingRelease))
                 .isEqualTo(new UpcomingRelease("2026-09-15", "27.0.0", 19, "2026-10-20", "", 54));
     }
 
     @Test
-    void getVendorsV3() {
-        assertThat(first(client().getVendorsV3(null).await().indefinitely(), "", 18,
+    void vendors() {
+        assertThat(first(client().vendors(null).await().indefinitely(), "", 18,
                 DiscoApiTest::isValidVendor))
                 .isEqualTo(new Vendor("AdoptOpenJDK", "adopt_open_jdk", null));
     }
