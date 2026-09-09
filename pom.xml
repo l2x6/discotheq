@@ -52,6 +52,7 @@
         <assertj.version>3.27.7</assertj.version>
         <quarkus.platform.version>3.39.2</quarkus.platform.version>
         <quarkus-openapi-generator.version>2.23.0</quarkus-openapi-generator.version>
+        <wiremock.version>3.13.2</wiremock.version>
 
         <!-- Plugins and their dependencies -->
         <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
@@ -124,6 +125,12 @@
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
                 <version>${assertj.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.wiremock</groupId>
+                <artifactId>wiremock</artifactId>
+                <version>${wiremock.version}</version>
             </dependency>
 
         </dependencies>

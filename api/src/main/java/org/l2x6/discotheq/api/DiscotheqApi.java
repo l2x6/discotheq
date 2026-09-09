@@ -4,7 +4,25 @@
  */
 package org.l2x6.discotheq.api.api;
 
+import jakarta.ws.rs.core.Response;
 import java.util.List;
+import org.l2x6.discotheq.api.model.ApiResponse;
+import org.l2x6.discotheq.api.model.Architecture;
+import org.l2x6.discotheq.api.model.DaysSinceRelease;
+import org.l2x6.discotheq.api.model.DaysSinceUpdate;
+import org.l2x6.discotheq.api.model.DiscoEndpoint;
+import org.l2x6.discotheq.api.model.DiscoPackage;
+import org.l2x6.discotheq.api.model.DiscoParameters;
+import org.l2x6.discotheq.api.model.Distribution;
+import org.l2x6.discotheq.api.model.Feature;
+import org.l2x6.discotheq.api.model.LatestDistributionVersion;
+import org.l2x6.discotheq.api.model.MajorVersion;
+import org.l2x6.discotheq.api.model.OperatingSystem;
+import org.l2x6.discotheq.api.model.RemainingDaysToRelease;
+import org.l2x6.discotheq.api.model.RemainingDaysToUpdate;
+import org.l2x6.discotheq.api.model.SupportedValue;
+import org.l2x6.discotheq.api.model.UpcomingRelease;
+import org.l2x6.discotheq.api.model.Vendor;
 
 /**
  * foojay DiscoAPI
@@ -17,7 +35,7 @@ import java.util.List;
 @org.eclipse.microprofile.rest.client.inject.RegisterRestClient(configKey = "foojay_yml")
 @jakarta.enterprise.context.ApplicationScoped
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
-public interface DefaultApi {
+public interface DiscotheqApi {
 
     /**
      * Return a list of major versions defined by the given parameters
@@ -43,7 +61,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/major_versions")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getAllMajorVersionsV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<MajorVersion>> getAllMajorVersionsV3(
 
             @jakarta.ws.rs.QueryParam("ea") Boolean ea,
 
@@ -70,7 +88,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/packages/all_builds_of_graalvm")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getAllPackagesGraalVMV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<DiscoPackage>> getAllPackagesGraalVMV3(
 
             @jakarta.ws.rs.QueryParam("downloadable") Boolean downloadable,
 
@@ -89,7 +107,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/packages/all_builds_of_openjdk")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getAllPackagesOpenJDKV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<DiscoPackage>> getAllPackagesOpenJDKV3(
 
             @jakarta.ws.rs.QueryParam("downloadable") Boolean downloadable,
 
@@ -106,7 +124,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/packages/all")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getAllPackagesV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<DiscoPackage>> getAllPackagesV3(
 
             @jakarta.ws.rs.QueryParam("downloadable") Boolean downloadable,
 
@@ -121,7 +139,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/days_since/release")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getDaysSinceLastRelease();
+    public io.smallrye.mutiny.Uni<ApiResponse<DaysSinceRelease>> getDaysSinceLastRelease();
 
     /**
      * Returns the days since the last update (e.
@@ -132,7 +150,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/days_since/update")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getDaysSinceLastUpdate();
+    public io.smallrye.mutiny.Uni<ApiResponse<DaysSinceUpdate>> getDaysSinceLastUpdate();
 
     /**
      * Returns detailled information about a given distribution
@@ -160,7 +178,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/distributions/{distro_name}")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getDistributionV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<Distribution>> getDistributionV3(
             @jakarta.ws.rs.PathParam("distro_name") String distroName,
 
             @jakarta.ws.rs.QueryParam("latest_per_update") Boolean latestPerUpdate,
@@ -193,7 +211,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/distributions/versions/{version}")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getDistributionsForGivenVersionV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<Distribution>> getDistributionsForGivenVersionV3(
             @jakarta.ws.rs.PathParam("version") String version,
 
             @jakarta.ws.rs.QueryParam("discovery_scope_id") List<String> discoveryScopeId,
@@ -218,7 +236,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/distributions")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getDistributionsV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<Distribution>> getDistributionsV3(
 
             @jakarta.ws.rs.QueryParam("include_versions") Boolean includeVersions,
 
@@ -270,7 +288,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/packages/jdks")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getJDKPackagesV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<DiscoPackage>> getJDKPackagesV3(
 
             @jakarta.ws.rs.QueryParam("version") String version,
 
@@ -352,7 +370,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/packages/jres")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getJREPackagesV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<DiscoPackage>> getJREPackagesV3(
 
             @jakarta.ws.rs.QueryParam("version") String version,
 
@@ -402,7 +420,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/distributions/versions/latest")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getLatestVersionPerDistributionV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<LatestDistributionVersion>> getLatestVersionPerDistributionV3(
 
             @jakarta.ws.rs.QueryParam("distribution") List<String> distribution,
 
@@ -422,7 +440,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/major_versions/{query}")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getMajorVersionV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<MajorVersion>> getMajorVersionV3(
             @jakarta.ws.rs.PathParam("query") String query,
 
             @jakarta.ws.rs.QueryParam("include_build") Boolean includeBuild,
@@ -449,7 +467,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/major_versions1")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getMajorVersionsNew(
+    public io.smallrye.mutiny.Uni<ApiResponse<MajorVersion>> getMajorVersionsNew(
 
             @jakarta.ws.rs.QueryParam("release_status") String releaseStatus,
 
@@ -473,7 +491,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/ids/{pkg_id}/redirect")
     @jakarta.ws.rs.Produces({ "application/octet-stream" })
-    public io.smallrye.mutiny.Uni<Object> getPackageRedirectV3(
+    public io.smallrye.mutiny.Uni<Response> getPackageRedirectV3(
             @jakarta.ws.rs.PathParam("pkg_id") String pkgId
 
     );
@@ -489,7 +507,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/packages/{id}")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getPackageV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<DiscoPackage>> getPackageV3(
             @jakarta.ws.rs.PathParam("id") String id
 
     );
@@ -555,7 +573,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/packages")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getPackagesV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<DiscoPackage>> getPackagesV3(
 
             @jakarta.ws.rs.QueryParam("version") String version,
 
@@ -618,7 +636,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/parameters")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getParametersV3();
+    public io.smallrye.mutiny.Uni<ApiResponse<DiscoParameters>> getParametersV3();
 
     /**
      * Returns the remaining days to next feature release (e.
@@ -629,7 +647,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/remaining_days/release")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getRemainingDaysToNextRelease();
+    public io.smallrye.mutiny.Uni<ApiResponse<RemainingDaysToRelease>> getRemainingDaysToNextRelease();
 
     /**
      * Returns the remaining days to next update (e.
@@ -640,7 +658,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/remaining_days/update")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getRemainingDaysToNextUpdate();
+    public io.smallrye.mutiny.Uni<ApiResponse<RemainingDaysToUpdate>> getRemainingDaysToNextUpdate();
 
     /**
      * Returns the specified major version including early access builds
@@ -655,7 +673,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/major_versions/{major_version}/ea")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getSpecificMajorVersionIncludingEaV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<MajorVersion>> getSpecificMajorVersionIncludingEaV3(
             @jakarta.ws.rs.PathParam("major_version") Integer majorVersion,
 
             @jakarta.ws.rs.QueryParam("include_build") Boolean includeBuild,
@@ -675,7 +693,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/major_versions/{major_version}/ga")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getSpecificMajorVersionV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<MajorVersion>> getSpecificMajorVersionV3(
             @jakarta.ws.rs.PathParam("major_version") Integer majorVersion,
 
             @jakarta.ws.rs.QueryParam("include_build") Boolean includeBuild,
@@ -691,7 +709,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_architectures")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getSupportedArchitectures();
+    public io.smallrye.mutiny.Uni<ApiResponse<Architecture>> getSupportedArchitectures();
 
     /**
      * Returns the supported archive types
@@ -702,7 +720,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_archive_types")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getSupportedArchiveTypes();
+    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> getSupportedArchiveTypes();
 
     /**
      * Returns the supported features
@@ -713,7 +731,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_features")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getSupportedFeatures();
+    public io.smallrye.mutiny.Uni<ApiResponse<Feature>> getSupportedFeatures();
 
     /**
      * Returns the supported floating point types
@@ -724,7 +742,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_fpus")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getSupportedFpus();
+    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> getSupportedFpus();
 
     /**
      * Returns the supported latest parameters
@@ -735,7 +753,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_latest_parameters")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getSupportedLatestParameters();
+    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> getSupportedLatestParameters();
 
     /**
      * Returns the supported libc types
@@ -746,7 +764,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_lib_c_types")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getSupportedLibCTypes();
+    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> getSupportedLibCTypes();
 
     /**
      * Returns the supported operating systems with their libc type
@@ -757,7 +775,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_operating_systems")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getSupportedOperatingSystems();
+    public io.smallrye.mutiny.Uni<ApiResponse<OperatingSystem>> getSupportedOperatingSystems();
 
     /**
      * Returns the supported package types
@@ -768,7 +786,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_package_types")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getSupportedPackageTypes();
+    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> getSupportedPackageTypes();
 
     /**
      * Returns the supported release status
@@ -779,7 +797,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_release_status")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getSupportedReleaseStatus();
+    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> getSupportedReleaseStatus();
 
     /**
      * Returns the supported terms of support
@@ -790,14 +808,14 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_terms_of_support")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getSupportedTermsOfSupport();
+    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> getSupportedTermsOfSupport();
 
     /**
      */
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/upcoming_releases")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getUpcomingReleases();
+    public io.smallrye.mutiny.Uni<ApiResponse<UpcomingRelease>> getUpcomingReleases();
 
     /**
      * Returns a list of all vendors with their distributions
@@ -809,7 +827,7 @@ public interface DefaultApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/vendors")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> getVendorsV3(
+    public io.smallrye.mutiny.Uni<ApiResponse<Vendor>> getVendorsV3(
 
             @jakarta.ws.rs.QueryParam("include_distributions") Boolean includeDistributions);
 
@@ -821,6 +839,6 @@ public interface DefaultApi {
      */
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<Object> v3();
+    public io.smallrye.mutiny.Uni<ApiResponse<DiscoEndpoint>> v3();
 
 }
