@@ -49,10 +49,9 @@
     <properties>
 
         <!-- Dependency versions in alphabectic order -->
-        <junit.version>5.14.4</junit.version>
         <assertj.version>3.27.7</assertj.version>
-        <quarkus.version>3.37.1</quarkus.version>
-        <quarkus-antora.version>3.33.1</quarkus-antora.version>
+        <quarkus.platform.version>3.39.2</quarkus.platform.version>
+        <quarkus-openapi-generator.version>2.23.0</quarkus-openapi-generator.version>
 
         <!-- Plugins and their dependencies -->
         <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
@@ -95,67 +94,31 @@
     </properties>
 
     <modules>
-        <module>client</module>
+        <module>api</module>
     </modules>
 
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.cli-assured</groupId>
-                <artifactId>cli-assured</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.cli-assured</groupId>
-                <artifactId>cli-assured-test-app</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.cli-assured</groupId>
-                <artifactId>cli-assured-maven</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.cli-assured</groupId>
-                <artifactId>cli-assured-sdkman</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.quarkus</groupId>
-                <artifactId>quarkus-core</artifactId>
-                <version>${quarkus.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.rest-assured</groupId>
-                <artifactId>rest-assured</artifactId>
-                <version>${rest-assured.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-compress</artifactId>
-                <version>${commons-compress.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>${junit.version}</version>
-                <scope>import</scope>
+                <groupId>io.quarkus.platform</groupId>
+                <artifactId>quarkus-bom</artifactId>
+                <version>${quarkus.platform.version}</version>
                 <type>pom</type>
+                <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.l2x6.discotheq</groupId>
+                <artifactId>discotheq-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.quarkiverse.openapi.generator</groupId>
+                <artifactId>quarkus-openapi-generator</artifactId>
+                <version>${quarkus-openapi-generator.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.assertj</groupId>
@@ -178,9 +141,9 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>io.quarkus</groupId>
+                    <groupId>io.quarkus.platform</groupId>
                     <artifactId>quarkus-maven-plugin</artifactId>
-                    <version>${quarkus.version}</version>
+                    <version>${quarkus.platform.version}</version>
                 </plugin>
 
                 <plugin>
@@ -341,21 +304,15 @@
                                 <exclude>**/*.adoc</exclude>
                                 <exclude>**/*.hbs</exclude>
                                 <exclude>**/*.expected.*</exclude>
-                                <exclude>**/create-extension-templates/*</exclude>
                                 <exclude>**/README.*</exclude>
                                 <exclude>**/.gitkeep</exclude>
-                                <exclude>**/ComparableVersion.java</exclude><!-- Keep the original header -->
                                 <exclude>.gitattributes/</exclude>
                                 <exclude>.mvn/wrapper/</exclude>
-                                <exclude>antora-cache/**</exclude>
-                                <exclude>node_modules/**</exclude>
-                                <exclude>package.json</exclude>
-                                <exclude>package-lock.json</exclude>
                                 <exclude>LICENSE</exclude>
                                 <exclude>mvnw</exclude>
                                 <exclude>mvnw.cmd</exclude>
                                 <exclude>.sdkmanrc</exclude>
-                                <exclude>src/test/resources/*.txt</exclude>
+                                <exclude>src/main/openapi/foojay.yml</exclude>
                             </excludes>
                         </licenseSet>
                     </licenseSets>
