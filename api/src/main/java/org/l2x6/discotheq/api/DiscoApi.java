@@ -35,7 +35,7 @@ import org.l2x6.discotheq.api.model.Vendor;
 @org.eclipse.microprofile.rest.client.inject.RegisterRestClient(configKey = "foojay_yml")
 @jakarta.enterprise.context.ApplicationScoped
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
-public interface DiscotheqApi {
+public interface DiscoApi {
 
     /**
      * Return a list of major versions defined by the given parameters

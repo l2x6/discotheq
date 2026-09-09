@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
-import org.l2x6.discotheq.api.api.DiscotheqApi;
 import org.l2x6.discotheq.api.model.ApiResponse;
 import org.l2x6.discotheq.api.model.Architecture;
 import org.l2x6.discotheq.api.model.DaysSinceRelease;
@@ -55,7 +54,7 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 import static org.assertj.core.api.Assertions.assertThat;
 
 @QuarkusTest
-class DiscotheqApiTest {
+class DiscoApiTest {
 
     private static final String API_RESOURCE_ROOT = "/disco/v3.0";
     private static final String PACKAGE_ID = "89e929798c69bb09512d7f655469018f";
@@ -128,7 +127,7 @@ class DiscotheqApiTest {
     @Test
     void getAllMajorVersionsV3() {
         final MajorVersion first = first(client().getAllMajorVersionsV3(null, null, null, null, null, null, null)
-                .await().indefinitely(), "", 21, DiscotheqApiTest::isValidMajorVersion);
+                .await().indefinitely(), "", 21, DiscoApiTest::isValidMajorVersion);
         assertMajorVersion(first, 26, "STS", true, false, "ga", 12, "26.0.2.1+1", "26",
                 "5b5b91120a81de58c540defb46dd1198304142fa15adceecd7ceb23eaf183414");
     }
@@ -136,19 +135,19 @@ class DiscotheqApiTest {
     @Test
     void getAllPackagesGraalVMV3() {
         assertThat(first(client().getAllPackagesGraalVMV3(null, null).await().indefinitely(), "", 1_171,
-                DiscotheqApiTest::isValidPackage)).isEqualTo(GRAALVM_JDK);
+                DiscoApiTest::isValidPackage)).isEqualTo(GRAALVM_JDK);
     }
 
     @Test
     void getAllPackagesOpenJDKV3() {
         assertThat(first(client().getAllPackagesOpenJDKV3(null, null).await().indefinitely(), "", 1_141,
-                DiscotheqApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
+                DiscoApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
     }
 
     @Test
     void getAllPackagesV3() {
         assertThat(first(client().getAllPackagesV3(null, null).await().indefinitely(), "", 1_145,
-                DiscotheqApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
+                DiscoApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
     }
 
     @Test
@@ -170,7 +169,7 @@ class DiscotheqApiTest {
     @Test
     void getDistributionV3() {
         final Distribution first = first(client().getDistributionV3("temurin", null, null, null, null, null, null, null)
-                .await().indefinitely(), "", 1, DiscotheqApiTest::isValidDistribution);
+                .await().indefinitely(), "", 1, DiscoApiTest::isValidDistribution);
         assertDistribution(first, "Temurin", "temurin", "eclipse_foundation", true, true, true, false,
                 "https://adoptium.net/temurin/releases", null, null, null, null,
                 922, "28-ea+14", "8.0.302+8",
@@ -180,7 +179,7 @@ class DiscotheqApiTest {
     @Test
     void getDistributionsForGivenVersionV3() {
         final Distribution first = first(client().getDistributionsForGivenVersionV3("21", null, null, null, null)
-                .await().indefinitely(), "", 15, DiscotheqApiTest::isValidDistribution);
+                .await().indefinitely(), "", 15, DiscoApiTest::isValidDistribution);
         assertDistribution(first, "Zulu", "zulu", "azul", true, true, true, false,
                 "https://www.azul.com/downloads/?package=jdk", null, null, null, null,
                 772, "27-ea+32", "6.0.42",
@@ -190,7 +189,7 @@ class DiscotheqApiTest {
     @Test
     void getDistributionsV3() {
         final Distribution first = first(client().getDistributionsV3(null, null, null).await().indefinitely(), "", 31,
-                DiscotheqApiTest::isValidDistribution);
+                DiscoApiTest::isValidDistribution);
         assertDistribution(first, "Zulu", "zulu", "azul", true, true, true, false,
                 "https://www.azul.com/downloads/?package=jdk", 12, "zulu", "Zulu Core",
                 "831d59bfdb8efbb558a6422be9b021f395502bf4fd49b59490134c8429c6d7b4",
@@ -203,7 +202,7 @@ class DiscotheqApiTest {
         assertThat(first(client().getJDKPackagesV3(
                 null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
                 null, null, null, null).await().indefinitely(), "33583 package(s) found", 1_141,
-                DiscotheqApiTest::isValidPackage)).isEqualTo(ZULU_JDK);
+                DiscoApiTest::isValidPackage)).isEqualTo(ZULU_JDK);
     }
 
     @Test
@@ -211,20 +210,20 @@ class DiscotheqApiTest {
         assertThat(first(client().getJREPackagesV3(
                 null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
                 null, null, null).await().indefinitely(), "19314 package(s) found", 1_136,
-                DiscotheqApiTest::isValidPackage)).isEqualTo(ZULU_JRE);
+                DiscoApiTest::isValidPackage)).isEqualTo(ZULU_JRE);
     }
 
     @Test
     void getLatestVersionPerDistributionV3() {
         assertThat(first(client().getLatestVersionPerDistributionV3(null, null).await().indefinitely(), "", 31,
-                DiscotheqApiTest::isValidLatestDistributionVersion))
+                DiscoApiTest::isValidLatestDistributionVersion))
                 .isEqualTo(new LatestDistributionVersion("Eliya JDK", "eliya", "25.0.3", ""));
     }
 
     @Test
     void getMajorVersionV3() {
         final MajorVersion first = first(client().getMajorVersionV3("latest_ga", null, null).await().indefinitely(),
-                "", 1, DiscotheqApiTest::isValidMajorVersion);
+                "", 1, DiscoApiTest::isValidMajorVersion);
         assertMajorVersion(first, 26, "STS", true, false, "ga", 12, "26.0.2.1+1", "26",
                 "5b5b91120a81de58c540defb46dd1198304142fa15adceecd7ceb23eaf183414");
     }
@@ -232,7 +231,7 @@ class DiscotheqApiTest {
     @Test
     void getMajorVersionsNew() {
         final MajorVersion first = first(client().getMajorVersionsNew(null, null, null, null, null, null)
-                .await().indefinitely(), "", 26, DiscotheqApiTest::isValidMajorVersion);
+                .await().indefinitely(), "", 26, DiscoApiTest::isValidMajorVersion);
         assertMajorVersion(first, 31, "STS", false, true, "ea", 0, null, null,
                 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
     }
@@ -249,7 +248,7 @@ class DiscotheqApiTest {
     @Test
     void getPackageV3() {
         assertThat(first(client().getPackageV3(PACKAGE_ID).await().indefinitely(), "", 1,
-                DiscotheqApiTest::isValidPackage)).isEqualTo(ZULU_JDK);
+                DiscoApiTest::isValidPackage)).isEqualTo(ZULU_JDK);
     }
 
     @Test
@@ -257,7 +256,7 @@ class DiscotheqApiTest {
         assertThat(first(client().getPackagesV3(
                 null, null, null, null, null, null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null, null, null, null, null, null)
-                .await().indefinitely(), "", 1_145, DiscotheqApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
+                .await().indefinitely(), "", 1_145, DiscoApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
     }
 
     @Test
@@ -285,7 +284,7 @@ class DiscotheqApiTest {
     @Test
     void getSpecificMajorVersionIncludingEaV3() {
         final MajorVersion first = first(client().getSpecificMajorVersionIncludingEaV3(21, null, null)
-                .await().indefinitely(), "", 1, DiscotheqApiTest::isValidMajorVersion);
+                .await().indefinitely(), "", 1, DiscoApiTest::isValidMajorVersion);
         assertMajorVersion(first, 21, "LTS", true, false, "ga", 292, "21.0.13-ea+5", "21-ea",
                 "95ff73048042a47cd3430be2e5904303881ead0a8261733150356a84088ea6e5");
     }
@@ -293,7 +292,7 @@ class DiscotheqApiTest {
     @Test
     void getSpecificMajorVersionV3() {
         final MajorVersion first = first(client().getSpecificMajorVersionV3(21, null, null)
-                .await().indefinitely(), "", 1, DiscotheqApiTest::isValidMajorVersion);
+                .await().indefinitely(), "", 1, DiscoApiTest::isValidMajorVersion);
         assertMajorVersion(first, 21, "LTS", true, false, "ga", 152, "21.0.12.1+2", "21",
                 "aba61be4e89e01b2c16bc20ebf0c7e4d592d7fa550cc45d31b9b2b14c3e1b93c");
     }
@@ -301,84 +300,84 @@ class DiscotheqApiTest {
     @Test
     void getSupportedArchitectures() {
         assertThat(first(client().getSupportedArchitectures().await().indefinitely(), "Supported architectures", 27,
-                DiscotheqApiTest::isValidArchitecture))
+                DiscoApiTest::isValidArchitecture))
                 .isEqualTo(new Architecture("AARCH64", "AARCH64", "aarch64", "64"));
     }
 
     @Test
     void getSupportedArchiveTypes() {
         assertThat(first(client().getSupportedArchiveTypes().await().indefinitely(), "Supported archive types", 19,
-                DiscotheqApiTest::isValidSupportedValue))
+                DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("APK", "apk", "apk"));
     }
 
     @Test
     void getSupportedFeatures() {
         assertThat(first(client().getSupportedFeatures().await().indefinitely(), "Supported features", 6,
-                DiscotheqApiTest::isValidFeature))
+                DiscoApiTest::isValidFeature))
                 .isEqualTo(new Feature("LOOM", "Loom", "loom"));
     }
 
     @Test
     void getSupportedFpus() {
         assertThat(first(client().getSupportedFpus().await().indefinitely(), "Supported floating point types", 5,
-                DiscotheqApiTest::isValidSupportedValue))
+                DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("HARD_FLOAT", "hardfloat", "hard_float"));
     }
 
     @Test
     void getSupportedLatestParameters() {
         assertThat(first(client().getSupportedLatestParameters().await().indefinitely(),
-                "Supported latest parameters", 7, DiscotheqApiTest::isValidSupportedValue))
+                "Supported latest parameters", 7, DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("ALL_OF_VERSION", "all of version", "all_of_version"));
     }
 
     @Test
     void getSupportedLibCTypes() {
         assertThat(first(client().getSupportedLibCTypes().await().indefinitely(), "Supported libc types", 6,
-                DiscotheqApiTest::isValidSupportedValue))
+                DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("GLIBC", "glibc", "glibc"));
     }
 
     @Test
     void getSupportedOperatingSystems() {
         assertThat(first(client().getSupportedOperatingSystems().await().indefinitely(),
-                "Supported operating systems", 11, DiscotheqApiTest::isValidOperatingSystem))
+                "Supported operating systems", 11, DiscoApiTest::isValidOperatingSystem))
                 .isEqualTo(new OperatingSystem("ALPINE_LINUX", "Alpine Linux", "linux", "musl"));
     }
 
     @Test
     void getSupportedPackageTypes() {
         assertThat(first(client().getSupportedPackageTypes().await().indefinitely(), "Supported package types", 4,
-                DiscotheqApiTest::isValidSupportedValue))
+                DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("JDK", "JDK", "jdk"));
     }
 
     @Test
     void getSupportedReleaseStatus() {
         assertThat(first(client().getSupportedReleaseStatus().await().indefinitely(), "Supported release status", 4,
-                DiscotheqApiTest::isValidSupportedValue))
+                DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("GA", "General Access", "ga"));
     }
 
     @Test
     void getSupportedTermsOfSupport() {
         assertThat(first(client().getSupportedTermsOfSupport().await().indefinitely(),
-                "Supported terms of support", 5, DiscotheqApiTest::isValidSupportedValue))
+                "Supported terms of support", 5, DiscoApiTest::isValidSupportedValue))
                 .isEqualTo(new SupportedValue("STS", "short term stable", "sts"));
     }
 
     @Test
     void getUpcomingReleases() {
         assertThat(first(client().getUpcomingReleases().await().indefinitely(), "", 1,
-                DiscotheqApiTest::isValidUpcomingRelease))
+                DiscoApiTest::isValidUpcomingRelease))
                 .isEqualTo(new UpcomingRelease("2026-09-15", "27.0.0", 19, "2026-10-20", "", 54));
     }
 
     @Test
     void getVendorsV3() {
         assertThat(first(client().getVendorsV3(null).await().indefinitely(), "", 18,
-                DiscotheqApiTest::isValidVendor))
+                DiscoApiTest::isValidVendor))
                 .isEqualTo(new Vendor("AdoptOpenJDK", "adopt_open_jdk", null));
     }
 
@@ -389,11 +388,11 @@ class DiscotheqApiTest {
                 .isEqualTo(new DiscoEndpoint("https://api.foojay.io/disco/v3.0/parameters"));
     }
 
-    private static DiscotheqApi client() {
+    private static org.l2x6.discotheq.api.api.DiscoApi client() {
         return QuarkusRestClientBuilder.newBuilder()
                 .baseUri(URI.create(WIRE_MOCK.baseUrl()))
                 .followRedirects(false)
-                .build(DiscotheqApi.class);
+                .build(org.l2x6.discotheq.api.api.DiscoApi.class);
     }
 
     private static <T> T first(ApiResponse<T> response, String expectedMessage, int expectedSize,
@@ -463,15 +462,15 @@ class DiscotheqApiTest {
     private static boolean isValidMajorVersion(MajorVersion value) {
         return value != null && value.majorVersion() > 0 && hasText(value.termOfSupport())
                 && value.maintained() != null && value.earlyAccessOnly() != null && hasText(value.releaseStatus())
-                && value.versions() != null && value.versions().stream().allMatch(DiscotheqApiTest::hasText);
+                && value.versions() != null && value.versions().stream().allMatch(DiscoApiTest::hasText);
     }
 
     private static boolean isValidDistribution(Distribution value) {
         return value != null && hasText(value.name()) && hasText(value.apiParameter()) && hasText(value.vendor())
                 && value.maintained() != null && value.available() != null && value.buildOfOpenjdk() != null
                 && value.buildOfGraalvm() != null && hasText(value.officialUri())
-                && (value.synonyms() == null || value.synonyms().stream().allMatch(DiscotheqApiTest::hasText))
-                && value.versions() != null && value.versions().stream().allMatch(DiscotheqApiTest::hasText);
+                && (value.synonyms() == null || value.synonyms().stream().allMatch(DiscoApiTest::hasText))
+                && value.versions() != null && value.versions().stream().allMatch(DiscoApiTest::hasText);
     }
 
     private static boolean isValidPackage(DiscoPackage value) {
@@ -519,7 +518,7 @@ class DiscotheqApiTest {
     private static boolean isValidVendor(Vendor value) {
         return value != null && hasText(value.uiString()) && hasText(value.apiString())
                 && (value.distributions() == null
-                        || value.distributions().stream().allMatch(DiscotheqApiTest::hasText));
+                        || value.distributions().stream().allMatch(DiscoApiTest::hasText));
     }
 
     private static boolean hasText(String value) {
