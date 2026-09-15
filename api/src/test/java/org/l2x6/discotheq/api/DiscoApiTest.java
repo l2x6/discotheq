@@ -4,6 +4,7 @@
  */
 package org.l2x6.discotheq.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
 import io.quarkus.rest.client.reactive.QuarkusRestClientBuilder;
@@ -73,7 +74,9 @@ import org.l2x6.discotheq.api.model.Vendor.KnownVendor;
 import org.l2x6.discotheq.api.model.Vendor.VendorRecord;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.getRequestedFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.okJson;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
@@ -284,6 +287,52 @@ class DiscoApiTest {
                 null, null, null, null, null, null, null, null, null, null, null, null, null,
                 null, null, null, null, null, null, null, null, null, null, null, null, null)
                 .await().indefinitely(), "", 1_145, DiscoApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
+    }
+
+    @Test
+    void packagesKnownApiValues() {
+        assertThat(first(client().packages(
+                null, null, null, null, null,
+                List.of(KnownArchitecture.AARCH64),
+                List.of(KnownArchiveType.TAR_GZ),
+                KnownPackageType.JDK,
+                List.of(KnownOperatingSystem.LINUX),
+                List.of(KnownLibCType.GLIBC),
+                null,
+                List.of(KnownReleaseStatus.GA),
+                List.of(KnownTermOfSupport.LTS),
+                null,
+                List.of(KnownFpu.HARD_FLOAT),
+                null, null, null,
+                KnownLatest.PER_DISTRIBUTION,
+                null, null, null, null, null, null, null)
+                .await().indefinitely(), "", 1_145, DiscoApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
+
+        WIRE_MOCK.verify(getRequestedFor(urlPathEqualTo(API_RESOURCE_ROOT + "/packages"))
+                .withQueryParam("architecture", equalTo("aarch64"))
+                .withQueryParam("archive_type", equalTo("tar.gz"))
+                .withQueryParam("package_type", equalTo("jdk"))
+                .withQueryParam("operating_system", equalTo("linux"))
+                .withQueryParam("libc_type", equalTo("glibc"))
+                .withQueryParam("release_status", equalTo("ga"))
+                .withQueryParam("term_of_support", equalTo("lts"))
+                .withQueryParam("fpu", equalTo("hard_float"))
+                .withQueryParam("latest", equalTo("per_distro")));
+    }
+
+    @Test
+    void knownApiValuesSerializeAsApiStrings() throws Exception {
+        assertThat(new ObjectMapper().writeValueAsString(List.of(
+                KnownArchitecture.AARCH64,
+                KnownArchiveType.TAR_GZ,
+                KnownFpu.HARD_FLOAT,
+                KnownLatest.PER_DISTRIBUTION,
+                KnownLibCType.GLIBC,
+                KnownOperatingSystem.LINUX,
+                KnownPackageType.JDK,
+                KnownReleaseStatus.GA,
+                KnownTermOfSupport.LTS)))
+                .isEqualTo("[\"aarch64\",\"tar.gz\",\"hard_float\",\"per_distro\",\"glibc\",\"linux\",\"jdk\",\"ga\",\"lts\"]");
     }
 
     @Test

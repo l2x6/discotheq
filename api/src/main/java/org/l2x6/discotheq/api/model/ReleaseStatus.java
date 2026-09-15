@@ -4,6 +4,7 @@
  */
 package org.l2x6.discotheq.api.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -43,8 +44,14 @@ public interface ReleaseStatus extends ApiValue {
         }
 
         @Override
+        @JsonValue
         public String apiString() {
             return value.apiString();
+        }
+
+        @Override
+        public String toString() {
+            return apiString();
         }
     }
 }
