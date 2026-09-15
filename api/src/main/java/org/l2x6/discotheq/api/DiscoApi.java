@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 import org.l2x6.discotheq.api.model.ApiResponse;
 import org.l2x6.discotheq.api.model.Architecture;
+import org.l2x6.discotheq.api.model.ArchiveType;
 import org.l2x6.discotheq.api.model.DaysSinceRelease;
 import org.l2x6.discotheq.api.model.DaysSinceUpdate;
 import org.l2x6.discotheq.api.model.DiscoEndpoint;
@@ -15,12 +16,17 @@ import org.l2x6.discotheq.api.model.DiscoPackage;
 import org.l2x6.discotheq.api.model.DiscoParameters;
 import org.l2x6.discotheq.api.model.Distribution;
 import org.l2x6.discotheq.api.model.Feature;
+import org.l2x6.discotheq.api.model.Fpu;
+import org.l2x6.discotheq.api.model.Latest;
 import org.l2x6.discotheq.api.model.LatestDistributionVersion;
+import org.l2x6.discotheq.api.model.LibCType;
 import org.l2x6.discotheq.api.model.MajorVersion;
 import org.l2x6.discotheq.api.model.OperatingSystem;
+import org.l2x6.discotheq.api.model.PackageType;
+import org.l2x6.discotheq.api.model.ReleaseStatus;
 import org.l2x6.discotheq.api.model.RemainingDaysToRelease;
 import org.l2x6.discotheq.api.model.RemainingDaysToUpdate;
-import org.l2x6.discotheq.api.model.SupportedValue;
+import org.l2x6.discotheq.api.model.TermOfSupport;
 import org.l2x6.discotheq.api.model.UpcomingRelease;
 import org.l2x6.discotheq.api.model.Vendor;
 
@@ -720,7 +726,7 @@ public interface DiscoApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_archive_types")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> supportedArchiveTypes();
+    public io.smallrye.mutiny.Uni<ApiResponse<ArchiveType>> supportedArchiveTypes();
 
     /**
      * Returns the supported features
@@ -742,7 +748,7 @@ public interface DiscoApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_fpus")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> supportedFpus();
+    public io.smallrye.mutiny.Uni<ApiResponse<Fpu>> supportedFpus();
 
     /**
      * Returns the supported latest parameters
@@ -753,7 +759,7 @@ public interface DiscoApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_latest_parameters")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> supportedLatestParameters();
+    public io.smallrye.mutiny.Uni<ApiResponse<Latest>> supportedLatestParameters();
 
     /**
      * Returns the supported libc types
@@ -764,7 +770,7 @@ public interface DiscoApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_lib_c_types")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> supportedLibCTypes();
+    public io.smallrye.mutiny.Uni<ApiResponse<LibCType>> supportedLibCTypes();
 
     /**
      * Returns the supported operating systems with their libc type
@@ -786,7 +792,7 @@ public interface DiscoApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_package_types")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> supportedPackageTypes();
+    public io.smallrye.mutiny.Uni<ApiResponse<PackageType>> supportedPackageTypes();
 
     /**
      * Returns the supported release status
@@ -797,7 +803,7 @@ public interface DiscoApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_release_status")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> supportedReleaseStatus();
+    public io.smallrye.mutiny.Uni<ApiResponse<ReleaseStatus>> supportedReleaseStatus();
 
     /**
      * Returns the supported terms of support
@@ -808,7 +814,7 @@ public interface DiscoApi {
     @jakarta.ws.rs.GET
     @jakarta.ws.rs.Path("/supported_terms_of_support")
     @jakarta.ws.rs.Produces({ "application/json" })
-    public io.smallrye.mutiny.Uni<ApiResponse<SupportedValue>> supportedTermsOfSupport();
+    public io.smallrye.mutiny.Uni<ApiResponse<TermOfSupport>> supportedTermsOfSupport();
 
     /**
      */
