@@ -14,6 +14,7 @@ import org.l2x6.discotheq.api.model.DaysSinceUpdate;
 import org.l2x6.discotheq.api.model.DiscoEndpoint;
 import org.l2x6.discotheq.api.model.DiscoPackage;
 import org.l2x6.discotheq.api.model.DiscoParameters;
+import org.l2x6.discotheq.api.model.DiscoveryScope;
 import org.l2x6.discotheq.api.model.Distribution;
 import org.l2x6.discotheq.api.model.Feature;
 import org.l2x6.discotheq.api.model.Fpu;
@@ -77,7 +78,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("include_build") Boolean includeBuild,
 
-            @jakarta.ws.rs.QueryParam("discovery_scope_id") List<String> discoveryScopeId,
+            @jakarta.ws.rs.QueryParam("discovery_scope_id") List<DiscoveryScope> discoveryScopeId,
 
             @jakarta.ws.rs.QueryParam("match") String match,
 
@@ -189,7 +190,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("latest_per_update") Boolean latestPerUpdate,
 
-            @jakarta.ws.rs.QueryParam("discovery_scope_id") List<String> discoveryScopeId,
+            @jakarta.ws.rs.QueryParam("discovery_scope_id") List<DiscoveryScope> discoveryScopeId,
 
             @jakarta.ws.rs.QueryParam("match") String match,
 
@@ -220,7 +221,7 @@ public interface DiscoApi {
     public io.smallrye.mutiny.Uni<ApiResponse<Distribution>> distributionsVersionsVersion(
             @jakarta.ws.rs.PathParam("version") String version,
 
-            @jakarta.ws.rs.QueryParam("discovery_scope_id") List<String> discoveryScopeId,
+            @jakarta.ws.rs.QueryParam("discovery_scope_id") List<DiscoveryScope> discoveryScopeId,
 
             @jakarta.ws.rs.QueryParam("match") String match,
 
@@ -248,7 +249,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("include_synonyms") Boolean includeSynonyms,
 
-            @jakarta.ws.rs.QueryParam("discovery_scope_id") List<String> discoveryScopeId);
+            @jakarta.ws.rs.QueryParam("discovery_scope_id") List<DiscoveryScope> discoveryScopeId);
 
     /**
      * Returns a list of packages that are of package_type JDK defined by the given parameters.
@@ -629,7 +630,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("aqavit_certified") String aqavitCertified,
 
-            @jakarta.ws.rs.QueryParam("discovery_scope_id") List<String> discoveryScopeId,
+            @jakarta.ws.rs.QueryParam("discovery_scope_id") List<DiscoveryScope> discoveryScopeId,
 
             @jakarta.ws.rs.QueryParam("match") String match);
 
