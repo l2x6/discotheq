@@ -31,6 +31,7 @@ import org.l2x6.discotheq.api.model.Architecture.KnownArchitecture;
 import org.l2x6.discotheq.api.model.ArchiveType;
 import org.l2x6.discotheq.api.model.ArchiveType.ArchiveTypeRecord;
 import org.l2x6.discotheq.api.model.ArchiveType.KnownArchiveType;
+import org.l2x6.discotheq.api.model.Bitness;
 import org.l2x6.discotheq.api.model.DaysSinceRelease;
 import org.l2x6.discotheq.api.model.DaysSinceUpdate;
 import org.l2x6.discotheq.api.model.DiscoEndpoint;
@@ -303,7 +304,7 @@ class DiscoApiTest {
                 null,
                 List.of(KnownReleaseStatus.GA),
                 List.of(KnownTermOfSupport.LTS),
-                null,
+                Bitness._64,
                 List.of(KnownFpu.HARD_FLOAT),
                 null, null, null,
                 KnownLatest.PER_DISTRIBUTION,
@@ -318,6 +319,7 @@ class DiscoApiTest {
                 .withQueryParam("libc_type", equalTo("glibc"))
                 .withQueryParam("release_status", equalTo("ga"))
                 .withQueryParam("term_of_support", equalTo("lts"))
+                .withQueryParam("bitness", equalTo("64"))
                 .withQueryParam("fpu", equalTo("hard_float"))
                 .withQueryParam("latest", equalTo("per_distro"))
                 .withQueryParam("discovery_scope_id", equalTo("public"))
@@ -328,6 +330,7 @@ class DiscoApiTest {
     void knownApiValuesSerializeAsApiStrings() throws Exception {
         assertThat(new ObjectMapper().writeValueAsString(List.of(
                 KnownArchitecture.AARCH64,
+                Bitness._64,
                 KnownArchiveType.TAR_GZ,
                 KnownFpu.HARD_FLOAT,
                 KnownLatest.PER_DISTRIBUTION,
@@ -338,7 +341,7 @@ class DiscoApiTest {
                 KnownTermOfSupport.LTS,
                 KnownDiscoveryScope.PUBLIC)))
                 .isEqualTo(
-                        "[\"aarch64\",\"tar.gz\",\"hard_float\",\"per_distro\",\"glibc\",\"linux\",\"jdk\",\"ga\",\"lts\",\"public\"]");
+                        "[\"aarch64\",\"64\",\"tar.gz\",\"hard_float\",\"per_distro\",\"glibc\",\"linux\",\"jdk\",\"ga\",\"lts\",\"public\"]");
     }
 
     @Test
@@ -388,7 +391,7 @@ class DiscoApiTest {
                 DiscoApiTest::isValidArchitecture))
                 .isInstanceOf(ArchitectureRecord.class)
                 .isEqualTo(KnownArchitecture.AARCH64)
-                .isEqualTo(new ArchitectureRecord("AARCH64", "AARCH64", "aarch64", "64"));
+                .isEqualTo(new ArchitectureRecord("AARCH64", "AARCH64", "aarch64", Bitness._64));
     }
 
     @Test
@@ -598,7 +601,7 @@ class DiscoApiTest {
 
     private static boolean isValidArchitecture(Architecture value) {
         return value != null && hasText(value.name()) && value.uiString() != null
-                && value.apiString() != null && value.bitness() != null;
+                && value.apiString() != null && (value.bitness() != null || value.apiString().isEmpty());
     }
 
     private static boolean isValidArchiveType(ArchiveType value) {
