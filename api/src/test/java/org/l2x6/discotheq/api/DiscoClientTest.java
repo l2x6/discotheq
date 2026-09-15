@@ -27,12 +27,12 @@ class DiscoClientTest {
 
         assertValid(response);
         assertThat(response.result())
-            .isNotEmpty()
-            .allSatisfy(version -> {
-            assertThat(version.earlyAccessOnly()).isFalse();
-            assertThat(version.releaseStatus()).isEqualTo("ga");
-            assertThat(version.versions()).isNotEmpty();
-        });
+                .isNotEmpty()
+                .allSatisfy(version -> {
+                    assertThat(version.earlyAccessOnly()).isFalse();
+                    assertThat(version.releaseStatus()).isEqualTo("ga");
+                    assertThat(version.versions()).isNotEmpty();
+                });
     }
 
     @Test
@@ -68,13 +68,13 @@ class DiscoClientTest {
     private static void assertFilteredGaVersions(ApiResponse<MajorVersion> response) {
         assertValid(response);
         assertThat(response.result())
-            .isNotEmpty()
-            .allSatisfy(version -> {
-            assertThat(version.earlyAccessOnly()).isFalse();
-            assertThat(version.releaseStatus()).isEqualTo("ga");
-            assertThat(version.maintained()).isTrue();
-            assertThat(version.versions()).isNullOrEmpty();
-        });
+                .isNotEmpty()
+                .allSatisfy(version -> {
+                    assertThat(version.earlyAccessOnly()).isFalse();
+                    assertThat(version.releaseStatus()).isEqualTo("ga");
+                    assertThat(version.maintained()).isTrue();
+                    assertThat(version.versions()).isNullOrEmpty();
+                });
     }
 
     private static void assertValid(ApiResponse<MajorVersion> response) {

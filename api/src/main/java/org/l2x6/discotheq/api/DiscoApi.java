@@ -9,6 +9,7 @@ import java.util.List;
 import org.l2x6.discotheq.api.model.ApiResponse;
 import org.l2x6.discotheq.api.model.Architecture;
 import org.l2x6.discotheq.api.model.ArchiveType;
+import org.l2x6.discotheq.api.model.Bitness;
 import org.l2x6.discotheq.api.model.DaysSinceRelease;
 import org.l2x6.discotheq.api.model.DaysSinceUpdate;
 import org.l2x6.discotheq.api.model.DiscoEndpoint;
@@ -609,7 +610,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("term_of_support") List<TermOfSupport> termOfSupport,
 
-            @jakarta.ws.rs.QueryParam("bitness") Integer bitness,
+            @jakarta.ws.rs.QueryParam("bitness") Bitness bitness,
 
             @jakarta.ws.rs.QueryParam("fpu") List<Fpu> fpu,
 
