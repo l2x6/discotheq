@@ -1,0 +1,186 @@
+{
+  "result" : [ {
+    "major_version" : 31,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : true,
+    "release_status" : "ea",
+    "versions" : null
+  }, {
+    "major_version" : 30,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : true,
+    "release_status" : "ea",
+    "versions" : null
+  }, {
+    "major_version" : 29,
+    "term_of_support" : "LTS",
+    "maintained" : false,
+    "early_access_only" : true,
+    "release_status" : "ea",
+    "versions" : null
+  }, {
+    "major_version" : 28,
+    "term_of_support" : "STS",
+    "maintained" : true,
+    "early_access_only" : true,
+    "release_status" : "ea",
+    "versions" : null
+  }, {
+    "major_version" : 27,
+    "term_of_support" : "STS",
+    "maintained" : true,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 26,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 25,
+    "term_of_support" : "LTS",
+    "maintained" : true,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 24,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 23,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 22,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 21,
+    "term_of_support" : "LTS",
+    "maintained" : true,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 20,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 19,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 18,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 17,
+    "term_of_support" : "LTS",
+    "maintained" : true,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 16,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 15,
+    "term_of_support" : "MTS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 14,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 13,
+    "term_of_support" : "MTS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 12,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 11,
+    "term_of_support" : "LTS",
+    "maintained" : true,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 10,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 9,
+    "term_of_support" : "STS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 8,
+    "term_of_support" : "LTS",
+    "maintained" : true,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 7,
+    "term_of_support" : "LTS",
+    "maintained" : true,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  }, {
+    "major_version" : 6,
+    "term_of_support" : "LTS",
+    "maintained" : false,
+    "early_access_only" : false,
+    "release_status" : "ga",
+    "versions" : null
+  } ],
+  "message" : ""
+}
