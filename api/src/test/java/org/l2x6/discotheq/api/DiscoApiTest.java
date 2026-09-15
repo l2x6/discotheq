@@ -53,6 +53,7 @@ import org.l2x6.discotheq.api.model.LibCType.KnownLibCType;
 import org.l2x6.discotheq.api.model.LibCType.LibCTypeRecord;
 import org.l2x6.discotheq.api.model.MajorVersion;
 import org.l2x6.discotheq.api.model.MajorVersionParameters;
+import org.l2x6.discotheq.api.model.Match;
 import org.l2x6.discotheq.api.model.OperatingSystem;
 import org.l2x6.discotheq.api.model.OperatingSystem.KnownOperatingSystem;
 import org.l2x6.discotheq.api.model.OperatingSystem.OperatingSystemRecord;
@@ -306,7 +307,7 @@ class DiscoApiTest {
                 List.of(KnownFpu.HARD_FLOAT),
                 null, null, null,
                 KnownLatest.PER_DISTRIBUTION,
-                null, null, null, null, null, List.of(KnownDiscoveryScope.PUBLIC), null)
+                null, null, null, null, null, List.of(KnownDiscoveryScope.PUBLIC), Match.ALL)
                 .await().indefinitely(), "", 1_145, DiscoApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
 
         WIRE_MOCK.verify(getRequestedFor(urlPathEqualTo(API_RESOURCE_ROOT + "/packages"))
@@ -319,7 +320,8 @@ class DiscoApiTest {
                 .withQueryParam("term_of_support", equalTo("lts"))
                 .withQueryParam("fpu", equalTo("hard_float"))
                 .withQueryParam("latest", equalTo("per_distro"))
-                .withQueryParam("discovery_scope_id", equalTo("public")));
+                .withQueryParam("discovery_scope_id", equalTo("public"))
+                .withQueryParam("match", equalTo("all")));
     }
 
     @Test

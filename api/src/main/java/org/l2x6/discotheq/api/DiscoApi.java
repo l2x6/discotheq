@@ -22,6 +22,7 @@ import org.l2x6.discotheq.api.model.Latest;
 import org.l2x6.discotheq.api.model.LatestDistributionVersion;
 import org.l2x6.discotheq.api.model.LibCType;
 import org.l2x6.discotheq.api.model.MajorVersion;
+import org.l2x6.discotheq.api.model.Match;
 import org.l2x6.discotheq.api.model.OperatingSystem;
 import org.l2x6.discotheq.api.model.PackageType;
 import org.l2x6.discotheq.api.model.ReleaseStatus;
@@ -80,7 +81,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("discovery_scope_id") List<DiscoveryScope> discoveryScopeId,
 
-            @jakarta.ws.rs.QueryParam("match") String match,
+            @jakarta.ws.rs.QueryParam("match") Match match,
 
             @jakarta.ws.rs.QueryParam("include_versions") Boolean includeVersions);
 
@@ -192,7 +193,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("discovery_scope_id") List<DiscoveryScope> discoveryScopeId,
 
-            @jakarta.ws.rs.QueryParam("match") String match,
+            @jakarta.ws.rs.QueryParam("match") Match match,
 
             @jakarta.ws.rs.QueryParam("include_versions") Boolean includeVersions,
 
@@ -223,7 +224,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("discovery_scope_id") List<DiscoveryScope> discoveryScopeId,
 
-            @jakarta.ws.rs.QueryParam("match") String match,
+            @jakarta.ws.rs.QueryParam("match") Match match,
 
             @jakarta.ws.rs.QueryParam("include_versions") Boolean includeVersions,
 
@@ -333,7 +334,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("aqavit_certified") String aqavitCertified,
 
-            @jakarta.ws.rs.QueryParam("match") String match);
+            @jakarta.ws.rs.QueryParam("match") Match match);
 
     /**
      * Returns a list of packages that are of package_type JRE defined by the given parameters.
@@ -413,7 +414,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("aqavit_certified") String aqavitCertified,
 
-            @jakarta.ws.rs.QueryParam("match") String match);
+            @jakarta.ws.rs.QueryParam("match") Match match);
 
     /**
      * Returns the latest ea and ga versions for the given distribution(s)
@@ -632,7 +633,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("discovery_scope_id") List<DiscoveryScope> discoveryScopeId,
 
-            @jakarta.ws.rs.QueryParam("match") String match);
+            @jakarta.ws.rs.QueryParam("match") Match match);
 
     /**
      * Returns a list of parameters and their possible values which are used in the Disco API
