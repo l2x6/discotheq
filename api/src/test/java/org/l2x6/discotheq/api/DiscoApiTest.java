@@ -36,7 +36,8 @@ import org.l2x6.discotheq.api.model.DaysSinceUpdate;
 import org.l2x6.discotheq.api.model.DiscoEndpoint;
 import org.l2x6.discotheq.api.model.DiscoPackage;
 import org.l2x6.discotheq.api.model.DiscoParameters;
-import org.l2x6.discotheq.api.model.DiscoveryScope;
+import org.l2x6.discotheq.api.model.DiscoveryScope.DiscoveryScopeRecord;
+import org.l2x6.discotheq.api.model.DiscoveryScope.KnownDiscoveryScope;
 import org.l2x6.discotheq.api.model.Distribution;
 import org.l2x6.discotheq.api.model.Feature;
 import org.l2x6.discotheq.api.model.Fpu;
@@ -135,7 +136,7 @@ class DiscoApiTest {
                     "linux,free_bsd,macos,windows,solaris,qnx,aix", "jdk,jre", "ga,ea", "sts,mts,lts",
                     "true,false", "md5,sha1,sha256,sha224,sha384,sha512,sha3_256", "feature.interim.update.patch"),
             new MajorVersionParameters("true,false", "true,false"),
-            new DiscoveryScope("public,build_of_openjdk,directly_downloadable,not_directly_downloadable"),
+            new DiscoveryScopeRecord("public,build_of_openjdk,directly_downloadable,not_directly_downloadable"),
             new IdParameters("test"));
 
     @RegisterExtension
@@ -305,7 +306,7 @@ class DiscoApiTest {
                 List.of(KnownFpu.HARD_FLOAT),
                 null, null, null,
                 KnownLatest.PER_DISTRIBUTION,
-                null, null, null, null, null, null, null)
+                null, null, null, null, null, List.of(KnownDiscoveryScope.PUBLIC), null)
                 .await().indefinitely(), "", 1_145, DiscoApiTest::isValidPackage)).isEqualTo(CORRETTO_JDK);
 
         WIRE_MOCK.verify(getRequestedFor(urlPathEqualTo(API_RESOURCE_ROOT + "/packages"))
@@ -317,7 +318,8 @@ class DiscoApiTest {
                 .withQueryParam("release_status", equalTo("ga"))
                 .withQueryParam("term_of_support", equalTo("lts"))
                 .withQueryParam("fpu", equalTo("hard_float"))
-                .withQueryParam("latest", equalTo("per_distro")));
+                .withQueryParam("latest", equalTo("per_distro"))
+                .withQueryParam("discovery_scope_id", equalTo("public")));
     }
 
     @Test
@@ -331,14 +333,19 @@ class DiscoApiTest {
                 KnownOperatingSystem.LINUX,
                 KnownPackageType.JDK,
                 KnownReleaseStatus.GA,
-                KnownTermOfSupport.LTS)))
-                .isEqualTo("[\"aarch64\",\"tar.gz\",\"hard_float\",\"per_distro\",\"glibc\",\"linux\",\"jdk\",\"ga\",\"lts\"]");
+                KnownTermOfSupport.LTS,
+                KnownDiscoveryScope.PUBLIC)))
+                .isEqualTo(
+                        "[\"aarch64\",\"tar.gz\",\"hard_float\",\"per_distro\",\"glibc\",\"linux\",\"jdk\",\"ga\",\"lts\",\"public\"]");
     }
 
     @Test
     void parameters() {
-        assertThat(first(client().parameters().await().indefinitely(),
-                "url parameter for different endpoints", 1, value -> value != null)).isEqualTo(PARAMETERS);
+        final DiscoParameters actual = first(client().parameters().await().indefinitely(),
+                "url parameter for different endpoints", 1, value -> value != null);
+        assertThat(actual).isEqualTo(PARAMETERS);
+        assertThat(actual.distributions()).isInstanceOf(DiscoveryScopeRecord.class);
+        assertThat(new DiscoveryScopeRecord("public")).isEqualTo(KnownDiscoveryScope.PUBLIC);
     }
 
     @Test
