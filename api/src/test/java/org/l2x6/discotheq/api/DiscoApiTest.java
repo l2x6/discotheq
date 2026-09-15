@@ -27,6 +27,7 @@ import org.l2x6.discotheq.api.model.ApiResponse;
 import org.l2x6.discotheq.api.model.Architecture;
 import org.l2x6.discotheq.api.model.Architecture.ArchitectureRecord;
 import org.l2x6.discotheq.api.model.Architecture.KnownArchitecture;
+import org.l2x6.discotheq.api.model.ArchiveType;
 import org.l2x6.discotheq.api.model.DaysSinceRelease;
 import org.l2x6.discotheq.api.model.DaysSinceUpdate;
 import org.l2x6.discotheq.api.model.DiscoEndpoint;
@@ -35,8 +36,11 @@ import org.l2x6.discotheq.api.model.DiscoParameters;
 import org.l2x6.discotheq.api.model.Distribution;
 import org.l2x6.discotheq.api.model.DistributionParameters;
 import org.l2x6.discotheq.api.model.Feature;
+import org.l2x6.discotheq.api.model.Fpu;
 import org.l2x6.discotheq.api.model.IdParameters;
+import org.l2x6.discotheq.api.model.Latest;
 import org.l2x6.discotheq.api.model.LatestDistributionVersion;
+import org.l2x6.discotheq.api.model.LibCType;
 import org.l2x6.discotheq.api.model.MajorVersion;
 import org.l2x6.discotheq.api.model.MajorVersionParameters;
 import org.l2x6.discotheq.api.model.OperatingSystem;
@@ -44,9 +48,11 @@ import org.l2x6.discotheq.api.model.OperatingSystem.KnownOperatingSystem;
 import org.l2x6.discotheq.api.model.OperatingSystem.OperatingSystemRecord;
 import org.l2x6.discotheq.api.model.PackageLinks;
 import org.l2x6.discotheq.api.model.PackageParameters;
+import org.l2x6.discotheq.api.model.PackageType;
+import org.l2x6.discotheq.api.model.ReleaseStatus;
 import org.l2x6.discotheq.api.model.RemainingDaysToRelease;
 import org.l2x6.discotheq.api.model.RemainingDaysToUpdate;
-import org.l2x6.discotheq.api.model.SupportedValue;
+import org.l2x6.discotheq.api.model.TermOfSupport;
 import org.l2x6.discotheq.api.model.UpcomingRelease;
 import org.l2x6.discotheq.api.model.Vendor;
 import org.l2x6.discotheq.api.model.Vendor.KnownVendor;
@@ -316,8 +322,8 @@ class DiscoApiTest {
     @Test
     void supportedArchiveTypes() {
         assertThat(first(client().supportedArchiveTypes().await().indefinitely(), "Supported archive types", 19,
-                DiscoApiTest::isValidSupportedValue))
-                .isEqualTo(new SupportedValue("APK", "apk", "apk"));
+                DiscoApiTest::isValidArchiveType))
+                .isEqualTo(new ArchiveType("APK", "apk", "apk"));
     }
 
     @Test
@@ -330,22 +336,22 @@ class DiscoApiTest {
     @Test
     void supportedFpus() {
         assertThat(first(client().supportedFpus().await().indefinitely(), "Supported floating point types", 5,
-                DiscoApiTest::isValidSupportedValue))
-                .isEqualTo(new SupportedValue("HARD_FLOAT", "hardfloat", "hard_float"));
+                DiscoApiTest::isValidFpu))
+                .isEqualTo(new Fpu("HARD_FLOAT", "hardfloat", "hard_float"));
     }
 
     @Test
     void supportedLatestParameters() {
         assertThat(first(client().supportedLatestParameters().await().indefinitely(),
-                "Supported latest parameters", 7, DiscoApiTest::isValidSupportedValue))
-                .isEqualTo(new SupportedValue("ALL_OF_VERSION", "all of version", "all_of_version"));
+                "Supported latest parameters", 7, DiscoApiTest::isValidLatest))
+                .isEqualTo(new Latest("ALL_OF_VERSION", "all of version", "all_of_version"));
     }
 
     @Test
     void supportedLibCTypes() {
         assertThat(first(client().supportedLibCTypes().await().indefinitely(), "Supported libc types", 6,
-                DiscoApiTest::isValidSupportedValue))
-                .isEqualTo(new SupportedValue("GLIBC", "glibc", "glibc"));
+                DiscoApiTest::isValidLibCType))
+                .isEqualTo(new LibCType("GLIBC", "glibc", "glibc"));
     }
 
     @Test
@@ -360,22 +366,22 @@ class DiscoApiTest {
     @Test
     void supportedPackageTypes() {
         assertThat(first(client().supportedPackageTypes().await().indefinitely(), "Supported package types", 4,
-                DiscoApiTest::isValidSupportedValue))
-                .isEqualTo(new SupportedValue("JDK", "JDK", "jdk"));
+                DiscoApiTest::isValidPackageType))
+                .isEqualTo(new PackageType("JDK", "JDK", "jdk"));
     }
 
     @Test
     void supportedReleaseStatus() {
         assertThat(first(client().supportedReleaseStatus().await().indefinitely(), "Supported release status", 4,
-                DiscoApiTest::isValidSupportedValue))
-                .isEqualTo(new SupportedValue("GA", "General Access", "ga"));
+                DiscoApiTest::isValidReleaseStatus))
+                .isEqualTo(new ReleaseStatus("GA", "General Access", "ga"));
     }
 
     @Test
     void supportedTermsOfSupport() {
         assertThat(first(client().supportedTermsOfSupport().await().indefinitely(),
-                "Supported terms of support", 5, DiscoApiTest::isValidSupportedValue))
-                .isEqualTo(new SupportedValue("STS", "short term stable", "sts"));
+                "Supported terms of support", 5, DiscoApiTest::isValidTermOfSupport))
+                .isEqualTo(new TermOfSupport("STS", "short term stable", "sts"));
     }
 
     @Test
@@ -509,8 +515,36 @@ class DiscoApiTest {
                 && value.apiString() != null && value.bitness() != null;
     }
 
-    private static boolean isValidSupportedValue(SupportedValue value) {
-        return value != null && hasText(value.name()) && value.uiString() != null && value.apiString() != null;
+    private static boolean isValidArchiveType(ArchiveType value) {
+        return value != null && isValidNamedApiValue(value.name(), value.uiString(), value.apiString());
+    }
+
+    private static boolean isValidFpu(Fpu value) {
+        return value != null && isValidNamedApiValue(value.name(), value.uiString(), value.apiString());
+    }
+
+    private static boolean isValidLatest(Latest value) {
+        return value != null && isValidNamedApiValue(value.name(), value.uiString(), value.apiString());
+    }
+
+    private static boolean isValidLibCType(LibCType value) {
+        return value != null && isValidNamedApiValue(value.name(), value.uiString(), value.apiString());
+    }
+
+    private static boolean isValidPackageType(PackageType value) {
+        return value != null && isValidNamedApiValue(value.name(), value.uiString(), value.apiString());
+    }
+
+    private static boolean isValidReleaseStatus(ReleaseStatus value) {
+        return value != null && isValidNamedApiValue(value.name(), value.uiString(), value.apiString());
+    }
+
+    private static boolean isValidTermOfSupport(TermOfSupport value) {
+        return value != null && isValidNamedApiValue(value.name(), value.uiString(), value.apiString());
+    }
+
+    private static boolean isValidNamedApiValue(String name, String uiString, String apiString) {
+        return hasText(name) && uiString != null && apiString != null;
     }
 
     private static boolean isValidFeature(Feature value) {
