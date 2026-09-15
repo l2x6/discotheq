@@ -2,13 +2,13 @@
  * SPDX-FileCopyrightText: Copyright (c) 2026 Discotheq contributors as indicated by the @author tags
  *                                 SPDX-License-Identifier: Apache-2.0
  */
-package org.l2x6.discotheq.api;
+package org.l2x6.discotheq.api.builder;
 
 import io.quarkus.test.junit.QuarkusTest;
 import java.time.Duration;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.l2x6.discotheq.api.builder.MajorVersionsBuilder;
+import org.l2x6.discotheq.api.DiscoClient;
 import org.l2x6.discotheq.api.model.ApiResponse;
 import org.l2x6.discotheq.api.model.DiscoveryScope.KnownDiscoveryScope;
 import org.l2x6.discotheq.api.model.MajorVersion;
@@ -16,7 +16,7 @@ import org.l2x6.discotheq.api.model.MajorVersion;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @QuarkusTest
-class DiscoClientTest {
+class MajorVersionsBuilderTest {
 
     private static final Duration TIMEOUT = Duration.ofSeconds(30);
     private static final DiscoClient CLIENT = DiscoClient.of("https://api.foojay.io");
@@ -27,7 +27,7 @@ class DiscoClientTest {
 
         assertValid(response);
         assertThat(response.result())
-                .isNotEmpty()
+                .hasSizeGreaterThanOrEqualTo(22)
                 .allSatisfy(version -> {
                     assertThat(version.earlyAccessOnly()).isFalse();
                     assertThat(version.releaseStatus()).isEqualTo("ga");
@@ -36,39 +36,34 @@ class DiscoClientTest {
     }
 
     @Test
-    void majorVersionsWithConvenienceOptions() {
-        final ApiResponse<MajorVersion> response = call(CLIENT.majorVersions()
+    void majorVersionsWithExplicitAndScopeOptions() {
+
+        assertMajorVersionsWithExplicitAndScopeOptions(call(CLIENT.majorVersions()
                 .notEa()
                 .ga()
                 .maintained()
                 .includeBuild()
-                .notIncludeVersions());
+                .discoveryScopeId(List.of(KnownDiscoveryScope.PUBLIC))
+                .notIncludeVersions()));
 
-        assertFilteredGaVersions(response);
-    }
-
-    @Test
-    void majorVersionsWithExplicitAndScopeOptions() {
-        final ApiResponse<MajorVersion> response = call(CLIENT.majorVersions()
+        assertMajorVersionsWithExplicitAndScopeOptions(call(CLIENT.majorVersions()
                 .ea(false)
                 .ga(true)
                 .maintained(true)
-                .includeBuild(false)
+                .includeBuild(true)
                 .discoveryScopeId(List.of(KnownDiscoveryScope.PUBLIC))
                 .matchAll()
-                .includeVersions(false));
-
-        assertFilteredGaVersions(response);
+                .includeVersions(false)));
     }
 
     private static ApiResponse<MajorVersion> call(MajorVersionsBuilder builder) {
         return builder.call().await().atMost(TIMEOUT);
     }
 
-    private static void assertFilteredGaVersions(ApiResponse<MajorVersion> response) {
+    private static void assertMajorVersionsWithExplicitAndScopeOptions(ApiResponse<MajorVersion> response) {
         assertValid(response);
         assertThat(response.result())
-                .isNotEmpty()
+                .hasSize(7)
                 .allSatisfy(version -> {
                     assertThat(version.earlyAccessOnly()).isFalse();
                     assertThat(version.releaseStatus()).isEqualTo("ga");
@@ -80,12 +75,13 @@ class DiscoClientTest {
     private static void assertValid(ApiResponse<MajorVersion> response) {
         assertThat(response).isNotNull();
         assertThat(response.message()).isNotNull();
-        assertThat(response.result()).isNotEmpty().allSatisfy(version -> {
-            assertThat(version.majorVersion()).isPositive();
-            assertThat(version.termOfSupport()).isNotBlank();
-            assertThat(version.maintained()).isNotNull();
-            assertThat(version.earlyAccessOnly()).isNotNull();
-            assertThat(version.releaseStatus()).isNotBlank();
-        });
+        assertThat(response.result())
+                .allSatisfy(version -> {
+                    assertThat(version.majorVersion()).isPositive();
+                    assertThat(version.termOfSupport()).isNotBlank();
+                    assertThat(version.maintained()).isNotNull();
+                    assertThat(version.earlyAccessOnly()).isNotNull();
+                    assertThat(version.releaseStatus()).isNotBlank();
+                });
     }
 }
