@@ -17,7 +17,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>discotheq-api</artifactId>
+    <artifactId>discotheq</artifactId>
     <name>${project.groupId}:${project.artifactId}</name>
 
     <dependencies>
