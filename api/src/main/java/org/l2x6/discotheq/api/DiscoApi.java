@@ -199,7 +199,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("include_ea") Boolean includeEa,
 
-            @jakarta.ws.rs.QueryParam("term_of_support") List<String> termOfSupport);
+            @jakarta.ws.rs.QueryParam("term_of_support") List<TermOfSupport> termOfSupport);
 
     /**
      * Returns a list of all distributions that support the given java version
@@ -304,25 +304,25 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("distribution") List<String> distribution,
 
-            @jakarta.ws.rs.QueryParam("architecture") List<String> architecture,
+            @jakarta.ws.rs.QueryParam("architecture") List<Architecture> architecture,
 
-            @jakarta.ws.rs.QueryParam("fpu") List<String> fpu,
+            @jakarta.ws.rs.QueryParam("fpu") List<Fpu> fpu,
 
-            @jakarta.ws.rs.QueryParam("archive_type") List<String> archiveType,
+            @jakarta.ws.rs.QueryParam("archive_type") List<ArchiveType> archiveType,
 
-            @jakarta.ws.rs.QueryParam("operating_system") List<String> operatingSystem,
+            @jakarta.ws.rs.QueryParam("operating_system") List<OperatingSystem> operatingSystem,
 
-            @jakarta.ws.rs.QueryParam("libc_type") List<String> libcType,
+            @jakarta.ws.rs.QueryParam("libc_type") List<LibCType> libcType,
 
-            @jakarta.ws.rs.QueryParam("lib_c_type") List<String> libCType,
+            @jakarta.ws.rs.QueryParam("lib_c_type") List<LibCType> libCType,
 
-            @jakarta.ws.rs.QueryParam("release_status") List<String> releaseStatus,
+            @jakarta.ws.rs.QueryParam("release_status") List<ReleaseStatus> releaseStatus,
 
             @jakarta.ws.rs.QueryParam("javafx_bundled") Boolean javafxBundled,
 
             @jakarta.ws.rs.QueryParam("with_javafx_if_available") Boolean withJavafxIfAvailable,
 
-            @jakarta.ws.rs.QueryParam("latest") String latest,
+            @jakarta.ws.rs.QueryParam("latest") Latest latest,
 
             @jakarta.ws.rs.QueryParam("signature_available") Boolean signatureAvailable,
 
@@ -386,25 +386,25 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("distribution") List<String> distribution,
 
-            @jakarta.ws.rs.QueryParam("architecture") List<String> architecture,
+            @jakarta.ws.rs.QueryParam("architecture") List<Architecture> architecture,
 
-            @jakarta.ws.rs.QueryParam("fpu") List<String> fpu,
+            @jakarta.ws.rs.QueryParam("fpu") List<Fpu> fpu,
 
-            @jakarta.ws.rs.QueryParam("archive_type") List<String> archiveType,
+            @jakarta.ws.rs.QueryParam("archive_type") List<ArchiveType> archiveType,
 
-            @jakarta.ws.rs.QueryParam("operating_system") List<String> operatingSystem,
+            @jakarta.ws.rs.QueryParam("operating_system") List<OperatingSystem> operatingSystem,
 
-            @jakarta.ws.rs.QueryParam("libc_type") List<String> libcType,
+            @jakarta.ws.rs.QueryParam("libc_type") List<LibCType> libcType,
 
-            @jakarta.ws.rs.QueryParam("lib_c_type") List<String> libCType,
+            @jakarta.ws.rs.QueryParam("lib_c_type") List<LibCType> libCType,
 
-            @jakarta.ws.rs.QueryParam("release_status") List<String> releaseStatus,
+            @jakarta.ws.rs.QueryParam("release_status") List<ReleaseStatus> releaseStatus,
 
             @jakarta.ws.rs.QueryParam("javafx_bundled") Boolean javafxBundled,
 
             @jakarta.ws.rs.QueryParam("with_javafx_if_available") Boolean withJavafxIfAvailable,
 
-            @jakarta.ws.rs.QueryParam("latest") String latest,
+            @jakarta.ws.rs.QueryParam("latest") Latest latest,
 
             @jakarta.ws.rs.QueryParam("signature_available") Boolean signatureAvailable,
 
@@ -475,9 +475,9 @@ public interface DiscoApi {
     @jakarta.ws.rs.Produces({ "application/json" })
     public io.smallrye.mutiny.Uni<ApiResponse<MajorVersion>> majorVersions1(
 
-            @jakarta.ws.rs.QueryParam("release_status") String releaseStatus,
+            @jakarta.ws.rs.QueryParam("release_status") ReleaseStatus releaseStatus,
 
-            @jakarta.ws.rs.QueryParam("release_status_versions") String releaseStatusVersions,
+            @jakarta.ws.rs.QueryParam("release_status_versions") ReleaseStatus releaseStatusVersions,
 
             @jakarta.ws.rs.QueryParam("maintained") Boolean maintained,
 
@@ -591,25 +591,25 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("distribution") List<String> distribution,
 
-            @jakarta.ws.rs.QueryParam("architecture") List<String> architecture,
+            @jakarta.ws.rs.QueryParam("architecture") List<Architecture> architecture,
 
-            @jakarta.ws.rs.QueryParam("archive_type") List<String> archiveType,
+            @jakarta.ws.rs.QueryParam("archive_type") List<ArchiveType> archiveType,
 
-            @jakarta.ws.rs.QueryParam("package_type") String packageType,
+            @jakarta.ws.rs.QueryParam("package_type") PackageType packageType,
 
-            @jakarta.ws.rs.QueryParam("operating_system") List<String> operatingSystem,
+            @jakarta.ws.rs.QueryParam("operating_system") List<OperatingSystem> operatingSystem,
 
-            @jakarta.ws.rs.QueryParam("libc_type") List<String> libcType,
+            @jakarta.ws.rs.QueryParam("libc_type") List<LibCType> libcType,
 
-            @jakarta.ws.rs.QueryParam("lib_c_type") List<String> libCType,
+            @jakarta.ws.rs.QueryParam("lib_c_type") List<LibCType> libCType,
 
-            @jakarta.ws.rs.QueryParam("release_status") List<String> releaseStatus,
+            @jakarta.ws.rs.QueryParam("release_status") List<ReleaseStatus> releaseStatus,
 
-            @jakarta.ws.rs.QueryParam("term_of_support") List<String> termOfSupport,
+            @jakarta.ws.rs.QueryParam("term_of_support") List<TermOfSupport> termOfSupport,
 
             @jakarta.ws.rs.QueryParam("bitness") Integer bitness,
 
-            @jakarta.ws.rs.QueryParam("fpu") List<String> fpu,
+            @jakarta.ws.rs.QueryParam("fpu") List<Fpu> fpu,
 
             @jakarta.ws.rs.QueryParam("javafx_bundled") Boolean javafxBundled,
 
@@ -617,7 +617,7 @@ public interface DiscoApi {
 
             @jakarta.ws.rs.QueryParam("directly_downloadable") Boolean directlyDownloadable,
 
-            @jakarta.ws.rs.QueryParam("latest") String latest,
+            @jakarta.ws.rs.QueryParam("latest") Latest latest,
 
             @jakarta.ws.rs.QueryParam("feature") List<String> feature,
 
