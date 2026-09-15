@@ -388,11 +388,11 @@ class DiscoApiTest {
                 .isEqualTo(new DiscoEndpoint("https://api.foojay.io/disco/v3.0/parameters"));
     }
 
-    private static org.l2x6.discotheq.api.api.DiscoApi client() {
+    private static DiscoApi client() {
         return QuarkusRestClientBuilder.newBuilder()
                 .baseUri(URI.create(WIRE_MOCK.baseUrl()))
                 .followRedirects(false)
-                .build(org.l2x6.discotheq.api.api.DiscoApi.class);
+                .build(DiscoApi.class);
     }
 
     private static <T> T first(ApiResponse<T> response, String expectedMessage, int expectedSize,
