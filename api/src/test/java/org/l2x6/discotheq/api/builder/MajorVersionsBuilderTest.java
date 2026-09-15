@@ -5,21 +5,18 @@
 package org.l2x6.discotheq.api.builder;
 
 import io.quarkus.test.junit.QuarkusTest;
-import java.time.Duration;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.l2x6.discotheq.api.DiscoClient;
 import org.l2x6.discotheq.api.model.ApiResponse;
 import org.l2x6.discotheq.api.model.DiscoveryScope.KnownDiscoveryScope;
 import org.l2x6.discotheq.api.model.MajorVersion;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.l2x6.discotheq.api.builder.BuilderTestUtils.CLIENT;
+import static org.l2x6.discotheq.api.builder.BuilderTestUtils.TIMEOUT;
 
 @QuarkusTest
 class MajorVersionsBuilderTest {
-
-    private static final Duration TIMEOUT = Duration.ofSeconds(30);
-    private static final DiscoClient CLIENT = DiscoClient.of("https://api.foojay.io");
 
     @Test
     void majorVersionsWithDefaults() {
