@@ -28,6 +28,8 @@ import org.l2x6.discotheq.api.model.Architecture;
 import org.l2x6.discotheq.api.model.Architecture.ArchitectureRecord;
 import org.l2x6.discotheq.api.model.Architecture.KnownArchitecture;
 import org.l2x6.discotheq.api.model.ArchiveType;
+import org.l2x6.discotheq.api.model.ArchiveType.ArchiveTypeRecord;
+import org.l2x6.discotheq.api.model.ArchiveType.KnownArchiveType;
 import org.l2x6.discotheq.api.model.DaysSinceRelease;
 import org.l2x6.discotheq.api.model.DaysSinceUpdate;
 import org.l2x6.discotheq.api.model.DiscoEndpoint;
@@ -37,10 +39,16 @@ import org.l2x6.discotheq.api.model.Distribution;
 import org.l2x6.discotheq.api.model.DistributionParameters;
 import org.l2x6.discotheq.api.model.Feature;
 import org.l2x6.discotheq.api.model.Fpu;
+import org.l2x6.discotheq.api.model.Fpu.FpuRecord;
+import org.l2x6.discotheq.api.model.Fpu.KnownFpu;
 import org.l2x6.discotheq.api.model.IdParameters;
 import org.l2x6.discotheq.api.model.Latest;
+import org.l2x6.discotheq.api.model.Latest.KnownLatest;
+import org.l2x6.discotheq.api.model.Latest.LatestRecord;
 import org.l2x6.discotheq.api.model.LatestDistributionVersion;
 import org.l2x6.discotheq.api.model.LibCType;
+import org.l2x6.discotheq.api.model.LibCType.KnownLibCType;
+import org.l2x6.discotheq.api.model.LibCType.LibCTypeRecord;
 import org.l2x6.discotheq.api.model.MajorVersion;
 import org.l2x6.discotheq.api.model.MajorVersionParameters;
 import org.l2x6.discotheq.api.model.OperatingSystem;
@@ -49,10 +57,16 @@ import org.l2x6.discotheq.api.model.OperatingSystem.OperatingSystemRecord;
 import org.l2x6.discotheq.api.model.PackageLinks;
 import org.l2x6.discotheq.api.model.PackageParameters;
 import org.l2x6.discotheq.api.model.PackageType;
+import org.l2x6.discotheq.api.model.PackageType.KnownPackageType;
+import org.l2x6.discotheq.api.model.PackageType.PackageTypeRecord;
 import org.l2x6.discotheq.api.model.ReleaseStatus;
+import org.l2x6.discotheq.api.model.ReleaseStatus.KnownReleaseStatus;
+import org.l2x6.discotheq.api.model.ReleaseStatus.ReleaseStatusRecord;
 import org.l2x6.discotheq.api.model.RemainingDaysToRelease;
 import org.l2x6.discotheq.api.model.RemainingDaysToUpdate;
 import org.l2x6.discotheq.api.model.TermOfSupport;
+import org.l2x6.discotheq.api.model.TermOfSupport.KnownTermOfSupport;
+import org.l2x6.discotheq.api.model.TermOfSupport.TermOfSupportRecord;
 import org.l2x6.discotheq.api.model.UpcomingRelease;
 import org.l2x6.discotheq.api.model.Vendor;
 import org.l2x6.discotheq.api.model.Vendor.KnownVendor;
@@ -323,7 +337,9 @@ class DiscoApiTest {
     void supportedArchiveTypes() {
         assertThat(first(client().supportedArchiveTypes().await().indefinitely(), "Supported archive types", 19,
                 DiscoApiTest::isValidArchiveType))
-                .isEqualTo(new ArchiveType("APK", "apk", "apk"));
+                .isInstanceOf(ArchiveTypeRecord.class)
+                .isEqualTo(KnownArchiveType.APK)
+                .isEqualTo(new ArchiveTypeRecord("APK", "apk", "apk"));
     }
 
     @Test
@@ -337,21 +353,27 @@ class DiscoApiTest {
     void supportedFpus() {
         assertThat(first(client().supportedFpus().await().indefinitely(), "Supported floating point types", 5,
                 DiscoApiTest::isValidFpu))
-                .isEqualTo(new Fpu("HARD_FLOAT", "hardfloat", "hard_float"));
+                .isInstanceOf(FpuRecord.class)
+                .isEqualTo(KnownFpu.HARD_FLOAT)
+                .isEqualTo(new FpuRecord("HARD_FLOAT", "hardfloat", "hard_float"));
     }
 
     @Test
     void supportedLatestParameters() {
         assertThat(first(client().supportedLatestParameters().await().indefinitely(),
                 "Supported latest parameters", 7, DiscoApiTest::isValidLatest))
-                .isEqualTo(new Latest("ALL_OF_VERSION", "all of version", "all_of_version"));
+                .isInstanceOf(LatestRecord.class)
+                .isEqualTo(KnownLatest.ALL_OF_VERSION)
+                .isEqualTo(new LatestRecord("ALL_OF_VERSION", "all of version", "all_of_version"));
     }
 
     @Test
     void supportedLibCTypes() {
         assertThat(first(client().supportedLibCTypes().await().indefinitely(), "Supported libc types", 6,
                 DiscoApiTest::isValidLibCType))
-                .isEqualTo(new LibCType("GLIBC", "glibc", "glibc"));
+                .isInstanceOf(LibCTypeRecord.class)
+                .isEqualTo(KnownLibCType.GLIBC)
+                .isEqualTo(new LibCTypeRecord("GLIBC", "glibc", "glibc"));
     }
 
     @Test
@@ -367,21 +389,27 @@ class DiscoApiTest {
     void supportedPackageTypes() {
         assertThat(first(client().supportedPackageTypes().await().indefinitely(), "Supported package types", 4,
                 DiscoApiTest::isValidPackageType))
-                .isEqualTo(new PackageType("JDK", "JDK", "jdk"));
+                .isInstanceOf(PackageTypeRecord.class)
+                .isEqualTo(KnownPackageType.JDK)
+                .isEqualTo(new PackageTypeRecord("JDK", "JDK", "jdk"));
     }
 
     @Test
     void supportedReleaseStatus() {
         assertThat(first(client().supportedReleaseStatus().await().indefinitely(), "Supported release status", 4,
                 DiscoApiTest::isValidReleaseStatus))
-                .isEqualTo(new ReleaseStatus("GA", "General Access", "ga"));
+                .isInstanceOf(ReleaseStatusRecord.class)
+                .isEqualTo(KnownReleaseStatus.GA)
+                .isEqualTo(new ReleaseStatusRecord("GA", "General Access", "ga"));
     }
 
     @Test
     void supportedTermsOfSupport() {
         assertThat(first(client().supportedTermsOfSupport().await().indefinitely(),
                 "Supported terms of support", 5, DiscoApiTest::isValidTermOfSupport))
-                .isEqualTo(new TermOfSupport("STS", "short term stable", "sts"));
+                .isInstanceOf(TermOfSupportRecord.class)
+                .isEqualTo(KnownTermOfSupport.STS)
+                .isEqualTo(new TermOfSupportRecord("STS", "short term stable", "sts"));
     }
 
     @Test

@@ -10,13 +10,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import java.util.Objects;
 
 @JsonDeserialize(as = Architecture.ArchitectureRecord.class)
-public interface Architecture {
-
-    String name();
-
-    String uiString();
-
-    String apiString();
+public interface Architecture extends ApiValue {
 
     String bitness();
 
