@@ -6,7 +6,10 @@ package org.l2x6.discotheq.api;
 
 import io.quarkus.rest.client.reactive.QuarkusRestClientBuilder;
 import java.net.URI;
+import org.l2x6.discotheq.api.builder.DistributionsBuilder;
 import org.l2x6.discotheq.api.builder.MajorVersionsBuilder;
+import org.l2x6.discotheq.api.builder.PackagesAllBuilder;
+import org.l2x6.discotheq.api.builder.VendorsBuilder;
 
 public class DiscoClient {
 
@@ -32,5 +35,17 @@ public class DiscoClient {
 
     public MajorVersionsBuilder majorVersions() {
         return new MajorVersionsBuilder(this.api);
+    }
+
+    public VendorsBuilder vendors() {
+        return new VendorsBuilder(this.api);
+    }
+
+    public DistributionsBuilder distributions() {
+        return new DistributionsBuilder(this.api);
+    }
+
+    public PackagesAllBuilder packagesAll() {
+        return new PackagesAllBuilder(this.api);
     }
 }
