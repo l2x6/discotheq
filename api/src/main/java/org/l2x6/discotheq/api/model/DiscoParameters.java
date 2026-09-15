@@ -11,6 +11,6 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 public record DiscoParameters(
         PackageParameters packages,
         MajorVersionParameters majorVersions,
-        DistributionParameters distributions,
+        DiscoveryScope distributions,
         IdParameters ids) {
 }

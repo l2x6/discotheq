@@ -36,8 +36,8 @@ import org.l2x6.discotheq.api.model.DaysSinceUpdate;
 import org.l2x6.discotheq.api.model.DiscoEndpoint;
 import org.l2x6.discotheq.api.model.DiscoPackage;
 import org.l2x6.discotheq.api.model.DiscoParameters;
+import org.l2x6.discotheq.api.model.DiscoveryScope;
 import org.l2x6.discotheq.api.model.Distribution;
-import org.l2x6.discotheq.api.model.DistributionParameters;
 import org.l2x6.discotheq.api.model.Feature;
 import org.l2x6.discotheq.api.model.Fpu;
 import org.l2x6.discotheq.api.model.Fpu.FpuRecord;
@@ -135,7 +135,7 @@ class DiscoApiTest {
                     "linux,free_bsd,macos,windows,solaris,qnx,aix", "jdk,jre", "ga,ea", "sts,mts,lts",
                     "true,false", "md5,sha1,sha256,sha224,sha384,sha512,sha3_256", "feature.interim.update.patch"),
             new MajorVersionParameters("true,false", "true,false"),
-            new DistributionParameters("public,build_of_openjdk,directly_downloadable,not_directly_downloadable"),
+            new DiscoveryScope("public,build_of_openjdk,directly_downloadable,not_directly_downloadable"),
             new IdParameters("test"));
 
     @RegisterExtension
