@@ -11,13 +11,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import java.util.Objects;
 
 @JsonDeserialize(as = OperatingSystem.OperatingSystemRecord.class)
-public interface OperatingSystem {
-
-    String name();
-
-    String uiString();
-
-    String apiString();
+public interface OperatingSystem extends ApiValue {
 
     String libCType();
 
