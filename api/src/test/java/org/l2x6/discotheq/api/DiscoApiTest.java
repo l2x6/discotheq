@@ -25,6 +25,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.l2x6.discotheq.api.model.ApiResponse;
 import org.l2x6.discotheq.api.model.Architecture;
+import org.l2x6.discotheq.api.model.Architecture.ArchitectureRecord;
+import org.l2x6.discotheq.api.model.Architecture.KnownArchitecture;
 import org.l2x6.discotheq.api.model.DaysSinceRelease;
 import org.l2x6.discotheq.api.model.DaysSinceUpdate;
 import org.l2x6.discotheq.api.model.DiscoEndpoint;
@@ -38,6 +40,8 @@ import org.l2x6.discotheq.api.model.LatestDistributionVersion;
 import org.l2x6.discotheq.api.model.MajorVersion;
 import org.l2x6.discotheq.api.model.MajorVersionParameters;
 import org.l2x6.discotheq.api.model.OperatingSystem;
+import org.l2x6.discotheq.api.model.OperatingSystem.KnownOperatingSystem;
+import org.l2x6.discotheq.api.model.OperatingSystem.OperatingSystemRecord;
 import org.l2x6.discotheq.api.model.PackageLinks;
 import org.l2x6.discotheq.api.model.PackageParameters;
 import org.l2x6.discotheq.api.model.RemainingDaysToRelease;
@@ -45,6 +49,8 @@ import org.l2x6.discotheq.api.model.RemainingDaysToUpdate;
 import org.l2x6.discotheq.api.model.SupportedValue;
 import org.l2x6.discotheq.api.model.UpcomingRelease;
 import org.l2x6.discotheq.api.model.Vendor;
+import org.l2x6.discotheq.api.model.Vendor.KnownVendor;
+import org.l2x6.discotheq.api.model.Vendor.VendorRecord;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
@@ -195,6 +201,7 @@ class DiscoApiTest {
                 "831d59bfdb8efbb558a6422be9b021f395502bf4fd49b59490134c8429c6d7b4",
                 772, "27-ea+32", "6.0.42",
                 "ec00bbc5f04cd7a7f792c64d78e6d1df7db4aabd37fef99614bb3206e69005db");
+        assertThat(first).isInstanceOf(Distribution.class);
     }
 
     @Test
@@ -301,7 +308,9 @@ class DiscoApiTest {
     void supportedArchitectures() {
         assertThat(first(client().supportedArchitectures().await().indefinitely(), "Supported architectures", 27,
                 DiscoApiTest::isValidArchitecture))
-                .isEqualTo(new Architecture("AARCH64", "AARCH64", "aarch64", "64"));
+                .isInstanceOf(ArchitectureRecord.class)
+                .isEqualTo(KnownArchitecture.AARCH64)
+                .isEqualTo(new ArchitectureRecord("AARCH64", "AARCH64", "aarch64", "64"));
     }
 
     @Test
@@ -343,7 +352,9 @@ class DiscoApiTest {
     void supportedOperatingSystems() {
         assertThat(first(client().supportedOperatingSystems().await().indefinitely(),
                 "Supported operating systems", 11, DiscoApiTest::isValidOperatingSystem))
-                .isEqualTo(new OperatingSystem("ALPINE_LINUX", "Alpine Linux", "linux", "musl"));
+                .isInstanceOf(OperatingSystemRecord.class)
+                .isEqualTo(KnownOperatingSystem.ALPINE_LINUX)
+                .isEqualTo(new OperatingSystemRecord("ALPINE_LINUX", "Alpine Linux", "linux", "musl"));
     }
 
     @Test
@@ -378,7 +389,9 @@ class DiscoApiTest {
     void vendors() {
         assertThat(first(client().vendors(null).await().indefinitely(), "", 18,
                 DiscoApiTest::isValidVendor))
-                .isEqualTo(new Vendor("AdoptOpenJDK", "adopt_open_jdk", null));
+                .isInstanceOf(VendorRecord.class)
+                .isEqualTo(KnownVendor.adopt_open_jdk)
+                .isEqualTo(new VendorRecord("AdoptOpenJDK", "adopt_open_jdk"));
     }
 
     @Test
@@ -516,9 +529,7 @@ class DiscoApiTest {
     }
 
     private static boolean isValidVendor(Vendor value) {
-        return value != null && hasText(value.uiString()) && hasText(value.apiString())
-                && (value.distributions() == null
-                        || value.distributions().stream().allMatch(DiscoApiTest::hasText));
+        return value != null && hasText(value.uiString()) && hasText(value.apiString());
     }
 
     private static boolean hasText(String value) {
