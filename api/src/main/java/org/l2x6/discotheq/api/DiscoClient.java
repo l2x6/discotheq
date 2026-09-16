@@ -9,6 +9,8 @@ import java.net.URI;
 import org.l2x6.discotheq.api.builder.DistributionsBuilder;
 import org.l2x6.discotheq.api.builder.MajorVersionsBuilder;
 import org.l2x6.discotheq.api.builder.PackagesAllBuilder;
+import org.l2x6.discotheq.api.builder.PackagesJdksBuilder;
+import org.l2x6.discotheq.api.builder.PackagesJresBuilder;
 import org.l2x6.discotheq.api.builder.VendorsBuilder;
 
 public class DiscoClient {
@@ -47,5 +49,13 @@ public class DiscoClient {
 
     public PackagesAllBuilder packagesAll() {
         return new PackagesAllBuilder(this.api);
+    }
+
+    public PackagesJdksBuilder packagesJdks() {
+        return new PackagesJdksBuilder(this.api);
+    }
+
+    public PackagesJresBuilder packagesJres() {
+        return new PackagesJresBuilder(this.api);
     }
 }
