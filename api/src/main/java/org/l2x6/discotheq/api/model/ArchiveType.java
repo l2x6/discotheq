@@ -54,6 +54,15 @@ public interface ArchiveType extends ApiValue {
             this.value = new ArchiveTypeRecord(name, uiString, apiString);
         }
 
+        public static KnownArchiveType fromApiString(String value) {
+            for (KnownArchiveType known : values()) {
+                if (known.apiString().equalsIgnoreCase(value)) {
+                    return known;
+                }
+            }
+            return null;
+        }
+
         @Override
         public String uiString() {
             return value.uiString();

@@ -40,6 +40,15 @@ public interface Fpu extends ApiValue {
             this.value = new FpuRecord(name, uiString, apiString);
         }
 
+        public static KnownFpu fromApiString(String value) {
+            for (KnownFpu known : values()) {
+                if (known.apiString().equalsIgnoreCase(value)) {
+                    return known;
+                }
+            }
+            return null;
+        }
+
         @Override
         public String uiString() {
             return value.uiString();

@@ -52,6 +52,15 @@ public interface OperatingSystem extends ApiValue {
             this.value = new OperatingSystemRecord(name(), uiString, apiString, libCType);
         }
 
+        public static KnownOperatingSystem fromApiString(String value) {
+            for (KnownOperatingSystem known : values()) {
+                if (known.apiString().equalsIgnoreCase(value)) {
+                    return known;
+                }
+            }
+            return null;
+        }
+
         @Override
         public String uiString() {
             return value.uiString();

@@ -38,6 +38,15 @@ public interface DiscoveryScope {
             this.value = new DiscoveryScopeRecord(discoveryScopeId);
         }
 
+        public static KnownDiscoveryScope fromApiString(String value) {
+            for (KnownDiscoveryScope known : values()) {
+                if (known.discoveryScopeId().equalsIgnoreCase(value)) {
+                    return known;
+                }
+            }
+            return null;
+        }
+
         @Override
         @JsonValue
         public String discoveryScopeId() {

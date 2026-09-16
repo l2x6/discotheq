@@ -39,6 +39,15 @@ public interface ReleaseStatus extends ApiValue {
             this.value = new ReleaseStatusRecord(name, uiString, apiString);
         }
 
+        public static KnownReleaseStatus fromApiString(String value) {
+            for (KnownReleaseStatus known : values()) {
+                if (known.apiString().equalsIgnoreCase(value)) {
+                    return known;
+                }
+            }
+            return null;
+        }
+
         @Override
         public String uiString() {
             return value.uiString();

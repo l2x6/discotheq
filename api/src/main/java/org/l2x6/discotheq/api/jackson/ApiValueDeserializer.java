@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
 import java.io.IOException;
-import org.l2x6.discotheq.api.model.ApiValue;
+import java.util.Locale;
 import org.l2x6.discotheq.api.model.Architecture;
 import org.l2x6.discotheq.api.model.ArchiveType;
 import org.l2x6.discotheq.api.model.Bitness;
@@ -65,79 +65,70 @@ public final class ApiValueDeserializer extends JsonDeserializer<Object> impleme
 
     private Object fromApiString(String value) {
         if (valueType == Architecture.class) {
-            for (Architecture.KnownArchitecture known : Architecture.KnownArchitecture.values()) {
-                if (matches(known, value)) {
-                    return known;
-                }
+            final Architecture.KnownArchitecture known = Architecture.KnownArchitecture.fromApiString(value);
+            if (known != null) {
+                return known;
             }
-            return new Architecture.ArchitectureRecord(value, value, value, null);
+            return new Architecture.ArchitectureRecord(value.toUpperCase(Locale.ROOT), value, value, null);
         }
         if (valueType == ArchiveType.class) {
-            for (ArchiveType.KnownArchiveType known : ArchiveType.KnownArchiveType.values()) {
-                if (matches(known, value)) {
-                    return known;
-                }
+            final ArchiveType.KnownArchiveType known = ArchiveType.KnownArchiveType.fromApiString(value);
+            if (known != null) {
+                return known;
             }
-            return new ArchiveType.ArchiveTypeRecord(value, value, value);
+            return new ArchiveType.ArchiveTypeRecord(value.toUpperCase(Locale.ROOT), value, value);
         }
         if (valueType == DiscoveryScope.class) {
-            for (DiscoveryScope.KnownDiscoveryScope known : DiscoveryScope.KnownDiscoveryScope.values()) {
-                if (known.discoveryScopeId().equalsIgnoreCase(value)) {
-                    return known;
-                }
+            final DiscoveryScope.KnownDiscoveryScope known = DiscoveryScope.KnownDiscoveryScope.fromApiString(value);
+            if (known != null) {
+                return known;
             }
             return new DiscoveryScope.DiscoveryScopeRecord(value);
         }
         if (valueType == Fpu.class) {
-            for (Fpu.KnownFpu known : Fpu.KnownFpu.values()) {
-                if (matches(known, value)) {
-                    return known;
-                }
+            final Fpu.KnownFpu known = Fpu.KnownFpu.fromApiString(value);
+            if (known != null) {
+                return known;
             }
-            return new Fpu.FpuRecord(value, value, value);
+            return new Fpu.FpuRecord(value.toUpperCase(Locale.ROOT), value, value);
         }
         if (valueType == Latest.class) {
-            for (Latest.KnownLatest known : Latest.KnownLatest.values()) {
-                if (matches(known, value)) {
-                    return known;
-                }
+            final Latest.KnownLatest known = Latest.KnownLatest.fromApiString(value);
+            if (known != null) {
+                return known;
             }
-            return new Latest.LatestRecord(value, value, value);
+            return new Latest.LatestRecord(value.toUpperCase(Locale.ROOT), value, value);
         }
         if (valueType == LibCType.class) {
-            for (LibCType.KnownLibCType known : LibCType.KnownLibCType.values()) {
-                if (matches(known, value)) {
-                    return known;
-                }
+            final LibCType.KnownLibCType known = LibCType.KnownLibCType.fromApiString(value);
+            if (known != null) {
+                return known;
             }
-            return new LibCType.LibCTypeRecord(value, value, value);
+            return new LibCType.LibCTypeRecord(value.toUpperCase(Locale.ROOT), value, value);
         }
         if (valueType == OperatingSystem.class) {
-            return new OperatingSystem.OperatingSystemRecord(value, value, value, null);
+            return new OperatingSystem.OperatingSystemRecord(value.toUpperCase(Locale.ROOT), value, value, null);
         }
         if (valueType == PackageType.class) {
-            for (PackageType.KnownPackageType known : PackageType.KnownPackageType.values()) {
-                if (matches(known, value)) {
-                    return known;
-                }
+            final PackageType.KnownPackageType known = PackageType.KnownPackageType.fromApiString(value);
+            if (known != null) {
+                return known;
             }
-            return new PackageType.PackageTypeRecord(value, value, value);
+            return new PackageType.PackageTypeRecord(value.toUpperCase(Locale.ROOT), value, value);
         }
         if (valueType == ReleaseStatus.class) {
-            for (ReleaseStatus.KnownReleaseStatus known : ReleaseStatus.KnownReleaseStatus.values()) {
-                if (matches(known, value)) {
-                    return known;
-                }
+            final ReleaseStatus.KnownReleaseStatus known = ReleaseStatus.KnownReleaseStatus.fromApiString(value);
+            if (known != null) {
+                return known;
             }
-            return new ReleaseStatus.ReleaseStatusRecord(value, value, value);
+            return new ReleaseStatus.ReleaseStatusRecord(value.toUpperCase(Locale.ROOT), value, value);
         }
         if (valueType == TermOfSupport.class) {
-            for (TermOfSupport.KnownTermOfSupport known : TermOfSupport.KnownTermOfSupport.values()) {
-                if (matches(known, value)) {
-                    return known;
-                }
+            final TermOfSupport.KnownTermOfSupport known = TermOfSupport.KnownTermOfSupport.fromApiString(value);
+            if (known != null) {
+                return known;
             }
-            return new TermOfSupport.TermOfSupportRecord(value, value, value);
+            return new TermOfSupport.TermOfSupportRecord(value.toUpperCase(Locale.ROOT), value, value);
         }
         throw new IllegalArgumentException("Unsupported API value type " + valueType);
     }
@@ -181,10 +172,6 @@ public final class ApiValueDeserializer extends JsonDeserializer<Object> impleme
                     text(node, "name"), text(node, "ui_string"), text(node, "api_string"));
         }
         throw new IllegalArgumentException("Unsupported API value type " + valueType);
-    }
-
-    private static boolean matches(ApiValue known, String value) {
-        return known.apiString().equalsIgnoreCase(value) || known.name().equalsIgnoreCase(value);
     }
 
     private static boolean isApiValueType(Class<?> type) {

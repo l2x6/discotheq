@@ -53,6 +53,15 @@ public interface Vendor {
             this.uiString = uiString;
         }
 
+        public static KnownVendor fromApiString(String value) {
+            for (KnownVendor known : values()) {
+                if (known.apiString().equalsIgnoreCase(value)) {
+                    return known;
+                }
+            }
+            return null;
+        }
+
         @Override
         public String uiString() {
             return uiString;

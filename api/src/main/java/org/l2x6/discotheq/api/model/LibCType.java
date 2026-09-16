@@ -41,6 +41,15 @@ public interface LibCType extends ApiValue {
             this.value = new LibCTypeRecord(name, uiString, apiString);
         }
 
+        public static KnownLibCType fromApiString(String value) {
+            for (KnownLibCType known : values()) {
+                if (known.apiString().equalsIgnoreCase(value)) {
+                    return known;
+                }
+            }
+            return null;
+        }
+
         @Override
         public String uiString() {
             return value.uiString();

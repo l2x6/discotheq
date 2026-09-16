@@ -64,6 +64,15 @@ public interface Architecture extends ApiValue {
             this.value = new ArchitectureRecord(name(), uiString, apiString, bitness);
         }
 
+        public static KnownArchitecture fromApiString(String value) {
+            for (KnownArchitecture known : values()) {
+                if (known.apiString().equalsIgnoreCase(value)) {
+                    return known;
+                }
+            }
+            return null;
+        }
+
         @Override
         public String uiString() {
             return value.uiString();
