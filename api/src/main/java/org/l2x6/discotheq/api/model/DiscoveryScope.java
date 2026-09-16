@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import java.util.Objects;
 
-@JsonDeserialize(as = DiscoveryScope.DiscoveryScopeRecord.class)
+@JsonDeserialize(using = ApiValueDeserializer.class)
 public interface DiscoveryScope {
 
     String discoveryScopeId();

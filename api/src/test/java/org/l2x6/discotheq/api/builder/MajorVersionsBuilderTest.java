@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.l2x6.discotheq.api.model.ApiResponse;
 import org.l2x6.discotheq.api.model.DiscoveryScope.KnownDiscoveryScope;
 import org.l2x6.discotheq.api.model.MajorVersion;
+import org.l2x6.discotheq.api.model.ReleaseStatus.KnownReleaseStatus;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.l2x6.discotheq.api.builder.BuilderTestUtils.CLIENT;
@@ -27,7 +28,7 @@ class MajorVersionsBuilderTest {
                 .hasSizeGreaterThanOrEqualTo(22)
                 .allSatisfy(version -> {
                     assertThat(version.earlyAccessOnly()).isFalse();
-                    assertThat(version.releaseStatus()).isEqualTo("ga");
+                    assertThat(version.releaseStatus()).isEqualTo(KnownReleaseStatus.GA);
                     assertThat(version.versions()).isNotEmpty();
                 });
     }
@@ -63,7 +64,7 @@ class MajorVersionsBuilderTest {
                 .hasSize(7)
                 .allSatisfy(version -> {
                     assertThat(version.earlyAccessOnly()).isFalse();
-                    assertThat(version.releaseStatus()).isEqualTo("ga");
+                    assertThat(version.releaseStatus()).isEqualTo(KnownReleaseStatus.GA);
                     assertThat(version.maintained()).isTrue();
                     assertThat(version.versions()).isNullOrEmpty();
                 });
@@ -75,10 +76,12 @@ class MajorVersionsBuilderTest {
         assertThat(response.result())
                 .allSatisfy(version -> {
                     assertThat(version.majorVersion()).isPositive();
-                    assertThat(version.termOfSupport()).isNotBlank();
+                    assertThat(version.termOfSupport()).isNotNull();
+                    assertThat(version.termOfSupport().apiString()).isNotBlank();
                     assertThat(version.maintained()).isNotNull();
                     assertThat(version.earlyAccessOnly()).isNotNull();
-                    assertThat(version.releaseStatus()).isNotBlank();
+                    assertThat(version.releaseStatus()).isNotNull();
+                    assertThat(version.releaseStatus().apiString()).isNotBlank();
                 });
     }
 }

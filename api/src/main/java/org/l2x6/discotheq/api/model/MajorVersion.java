@@ -11,9 +11,9 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public record MajorVersion(
         Integer majorVersion,
-        String termOfSupport,
+        TermOfSupport termOfSupport,
         Boolean maintained,
         Boolean earlyAccessOnly,
-        String releaseStatus,
+        ReleaseStatus releaseStatus,
         List<String> versions) {
 }
