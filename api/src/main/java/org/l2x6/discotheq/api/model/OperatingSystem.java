@@ -11,14 +11,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import java.util.Objects;
 
-@JsonDeserialize(as = OperatingSystem.OperatingSystemRecord.class)
+@JsonDeserialize(using = ApiValueDeserializer.class)
 public interface OperatingSystem extends ApiValue {
 
-    String libCType();
+    LibCType libCType();
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     record OperatingSystemRecord(
-            String name, String uiString, String apiString, @JsonProperty("lib_c_type") String libCType)
+            String name, String uiString, String apiString, @JsonProperty("lib_c_type") LibCType libCType)
             implements
                 OperatingSystem {
         @Override
@@ -33,21 +33,21 @@ public interface OperatingSystem extends ApiValue {
     }
 
     enum KnownOperatingSystem implements OperatingSystem {
-        ALPINE_LINUX("Alpine Linux", "linux", "musl"),
-        LINUX_MUSL("Linux Musl", "linux", "musl"),
-        LINUX("Linux", "linux", "glibc"),
-        FREE_BSD("FreeBSD", "free_bsd", "libc"),
-        MACOS("Mac OS", "macos", "libc"),
-        WINDOWS("Windows", "windows", "c_std_lib"),
-        SOLARIS("Solaris", "solaris", "libc"),
-        QNX("QNX", "qnx", "libc"),
-        AIX("AIX", "aix", "libc"),
-        NONE("-", "", ""),
-        NOT_FOUND("", "", "");
+        ALPINE_LINUX("Alpine Linux", "linux", LibCType.KnownLibCType.MUSL),
+        LINUX_MUSL("Linux Musl", "linux", LibCType.KnownLibCType.MUSL),
+        LINUX("Linux", "linux", LibCType.KnownLibCType.GLIBC),
+        FREE_BSD("FreeBSD", "free_bsd", LibCType.KnownLibCType.LIBC),
+        MACOS("Mac OS", "macos", LibCType.KnownLibCType.LIBC),
+        WINDOWS("Windows", "windows", LibCType.KnownLibCType.C_STD_LIB),
+        SOLARIS("Solaris", "solaris", LibCType.KnownLibCType.LIBC),
+        QNX("QNX", "qnx", LibCType.KnownLibCType.LIBC),
+        AIX("AIX", "aix", LibCType.KnownLibCType.LIBC),
+        NONE("-", "", LibCType.KnownLibCType.NONE),
+        NOT_FOUND("", "", LibCType.KnownLibCType.NOT_FOUND);
 
         private final OperatingSystemRecord value;
 
-        KnownOperatingSystem(String uiString, String apiString, String libCType) {
+        KnownOperatingSystem(String uiString, String apiString, LibCType libCType) {
             this.value = new OperatingSystemRecord(name(), uiString, apiString, libCType);
         }
 
@@ -68,7 +68,7 @@ public interface OperatingSystem extends ApiValue {
         }
 
         @Override
-        public String libCType() {
+        public LibCType libCType() {
             return value.libCType();
         }
     }

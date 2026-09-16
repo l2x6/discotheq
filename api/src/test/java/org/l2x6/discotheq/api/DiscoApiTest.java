@@ -92,8 +92,10 @@ class DiscoApiTest {
     private static final String PACKAGE_ID = "89e929798c69bb09512d7f655469018f";
 
     private static final DiscoPackage ZULU_JDK = new DiscoPackage(
-            PACKAGE_ID, "dmg", "zulu", 26, "26.0.2.1+1", "26.32.203", 26, true, "ga", "sts", "macos",
-            "libc", "x64", "unknown", "jdk", true, true,
+            PACKAGE_ID, KnownArchiveType.DMG, "zulu", 26, "26.0.2.1+1", "26.32.203", 26, true,
+            KnownReleaseStatus.GA, KnownTermOfSupport.STS,
+            new OperatingSystemRecord("macos", "macos", "macos", null), KnownLibCType.LIBC,
+            KnownArchitecture.X64, KnownFpu.UNKNOWN, KnownPackageType.JDK, true, true,
             "zulu26.32.203-ca-fx-jdk26.0.2.1-macosx_x64.dmg",
             new PackageLinks("https://api.foojay.io/disco/v3.0/ids/" + PACKAGE_ID,
                     "https://api.foojay.io/disco/v3.0/ids/" + PACKAGE_ID + "/redirect"),
@@ -102,24 +104,30 @@ class DiscoApiTest {
             "unknown", "", 338_567_802L, List.of());
 
     private static final DiscoPackage CORRETTO_JDK = new DiscoPackage(
-            "475391b85d3045ee4bb5f4bbac2318f4", "deb", "corretto", 8, "8.0.222+10", "8.222.10", 8,
-            false, "ga", "lts", "linux", "glibc", "arm64", "unknown", "jdk", true, true,
+            "475391b85d3045ee4bb5f4bbac2318f4", KnownArchiveType.DEB, "corretto", 8, "8.0.222+10",
+            "8.222.10", 8, false, KnownReleaseStatus.GA, KnownTermOfSupport.LTS,
+            new OperatingSystemRecord("linux", "linux", "linux", null), KnownLibCType.GLIBC,
+            KnownArchitecture.ARM64, KnownFpu.UNKNOWN, KnownPackageType.JDK, true, true,
             "java-1.8.0-amazon-corretto-jdk_8.222.10-2_arm64.deb",
             new PackageLinks("https://api.foojay.io/disco/v3.0/ids/475391b85d3045ee4bb5f4bbac2318f4",
                     "https://api.foojay.io/disco/v3.0/ids/475391b85d3045ee4bb5f4bbac2318f4/redirect"),
             true, "unknown", "", "unknown", "", 100_014_032L, List.of());
 
     private static final DiscoPackage GRAALVM_JDK = new DiscoPackage(
-            "1da4c6f7907e2b64bf188d67b2f4dadd", "zip", "graalvm", 17, "17.0.7", "17.0.7", 17,
-            false, "ga", "lts", "windows", "c_std_lib", "x64", "unknown", "jdk", false, true,
+            "1da4c6f7907e2b64bf188d67b2f4dadd", KnownArchiveType.ZIP, "graalvm", 17, "17.0.7", "17.0.7",
+            17, false, KnownReleaseStatus.GA, KnownTermOfSupport.LTS,
+            new OperatingSystemRecord("windows", "windows", "windows", null), KnownLibCType.C_STD_LIB,
+            KnownArchitecture.X64, KnownFpu.UNKNOWN, KnownPackageType.JDK, false, true,
             "graalvm-jdk-17.0.7_windows-x64_bin.zip",
             new PackageLinks("https://api.foojay.io/disco/v3.0/ids/1da4c6f7907e2b64bf188d67b2f4dadd",
                     "https://api.foojay.io/disco/v3.0/ids/1da4c6f7907e2b64bf188d67b2f4dadd/redirect"),
             true, "unknown", "", "unknown", "", 320_428_700L, List.of());
 
     private static final DiscoPackage ZULU_JRE = new DiscoPackage(
-            "b9ab5073dfa6c3b74327ead131f76130", "zip", "zulu", 26, "26.0.2.1+1", "26.32.203", 26,
-            true, "ga", "sts", "windows", "c_std_lib", "x64", "unknown", "jre", false, true,
+            "b9ab5073dfa6c3b74327ead131f76130", KnownArchiveType.ZIP, "zulu", 26, "26.0.2.1+1", "26.32.203",
+            26, true, KnownReleaseStatus.GA, KnownTermOfSupport.STS,
+            new OperatingSystemRecord("windows", "windows", "windows", null), KnownLibCType.C_STD_LIB,
+            KnownArchitecture.X64, KnownFpu.UNKNOWN, KnownPackageType.JRE, false, true,
             "zulu26.32.203-ca-jre26.0.2.1-win_x64.zip",
             new PackageLinks("https://api.foojay.io/disco/v3.0/ids/b9ab5073dfa6c3b74327ead131f76130",
                     "https://api.foojay.io/disco/v3.0/ids/b9ab5073dfa6c3b74327ead131f76130/redirect"),
@@ -160,7 +168,8 @@ class DiscoApiTest {
     void majorVersions() {
         final MajorVersion first = first(client().majorVersions(null, null, null, null, null, null, null)
                 .await().indefinitely(), "", 21, DiscoApiTest::isValidMajorVersion);
-        assertMajorVersion(first, 26, "STS", true, false, "ga", 12, "26.0.2.1+1", "26",
+        assertMajorVersion(first, 26, KnownTermOfSupport.STS, true, false, KnownReleaseStatus.GA, 12,
+                "26.0.2.1+1", "26",
                 "5b5b91120a81de58c540defb46dd1198304142fa15adceecd7ceb23eaf183414");
     }
 
@@ -257,7 +266,8 @@ class DiscoApiTest {
     void majorVersionsQuery() {
         final MajorVersion first = first(client().majorVersionsQuery("latest_ga", null, null).await().indefinitely(),
                 "", 1, DiscoApiTest::isValidMajorVersion);
-        assertMajorVersion(first, 26, "STS", true, false, "ga", 12, "26.0.2.1+1", "26",
+        assertMajorVersion(first, 26, KnownTermOfSupport.STS, true, false, KnownReleaseStatus.GA, 12,
+                "26.0.2.1+1", "26",
                 "5b5b91120a81de58c540defb46dd1198304142fa15adceecd7ceb23eaf183414");
     }
 
@@ -265,7 +275,7 @@ class DiscoApiTest {
     void majorVersions1() {
         final MajorVersion first = first(client().majorVersions1(null, null, null, null, null, null)
                 .await().indefinitely(), "", 26, DiscoApiTest::isValidMajorVersion);
-        assertMajorVersion(first, 31, "STS", false, true, "ea", 0, null, null,
+        assertMajorVersion(first, 31, KnownTermOfSupport.STS, false, true, KnownReleaseStatus.EA, 0, null, null,
                 "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
     }
 
@@ -328,7 +338,8 @@ class DiscoApiTest {
 
     @Test
     void knownApiValuesSerializeAsApiStrings() throws Exception {
-        assertThat(new ObjectMapper().writeValueAsString(List.of(
+        final ObjectMapper mapper = new ObjectMapper();
+        assertThat(mapper.writeValueAsString(List.of(
                 KnownArchitecture.AARCH64,
                 Bitness._64,
                 KnownArchiveType.TAR_GZ,
@@ -342,6 +353,11 @@ class DiscoApiTest {
                 KnownDiscoveryScope.PUBLIC)))
                 .isEqualTo(
                         "[\"aarch64\",\"64\",\"tar.gz\",\"hard_float\",\"per_distro\",\"glibc\",\"linux\",\"jdk\",\"ga\",\"lts\",\"public\"]");
+        assertThat(mapper.readValue("\"ga\"", ReleaseStatus.class)).isEqualTo(KnownReleaseStatus.GA);
+        assertThat(mapper.readValue("\"linux\"", OperatingSystem.class))
+                .isEqualTo(new OperatingSystemRecord("linux", "linux", "linux", null));
+        assertThat(mapper.readValue("\"preview\"", ReleaseStatus.class))
+                .isEqualTo(new ReleaseStatusRecord("preview", "preview", "preview"));
     }
 
     @Test
@@ -373,7 +389,8 @@ class DiscoApiTest {
     void majorVersionsMajorVersionEa() {
         final MajorVersion first = first(client().majorVersionsMajorVersionEa(21, null, null)
                 .await().indefinitely(), "", 1, DiscoApiTest::isValidMajorVersion);
-        assertMajorVersion(first, 21, "LTS", true, false, "ga", 292, "21.0.13-ea+5", "21-ea",
+        assertMajorVersion(first, 21, KnownTermOfSupport.LTS, true, false, KnownReleaseStatus.GA, 292,
+                "21.0.13-ea+5", "21-ea",
                 "95ff73048042a47cd3430be2e5904303881ead0a8261733150356a84088ea6e5");
     }
 
@@ -381,7 +398,8 @@ class DiscoApiTest {
     void majorVersionsMajorVersionGa() {
         final MajorVersion first = first(client().majorVersionsMajorVersionGa(21, null, null)
                 .await().indefinitely(), "", 1, DiscoApiTest::isValidMajorVersion);
-        assertMajorVersion(first, 21, "LTS", true, false, "ga", 152, "21.0.12.1+2", "21",
+        assertMajorVersion(first, 21, KnownTermOfSupport.LTS, true, false, KnownReleaseStatus.GA, 152,
+                "21.0.12.1+2", "21",
                 "aba61be4e89e01b2c16bc20ebf0c7e4d592d7fa550cc45d31b9b2b14c3e1b93c");
     }
 
@@ -443,7 +461,8 @@ class DiscoApiTest {
                 "Supported operating systems", 11, DiscoApiTest::isValidOperatingSystem))
                 .isInstanceOf(OperatingSystemRecord.class)
                 .isEqualTo(KnownOperatingSystem.ALPINE_LINUX)
-                .isEqualTo(new OperatingSystemRecord("ALPINE_LINUX", "Alpine Linux", "linux", "musl"));
+                .isEqualTo(new OperatingSystemRecord(
+                        "ALPINE_LINUX", "Alpine Linux", "linux", KnownLibCType.MUSL));
     }
 
     @Test
@@ -511,8 +530,8 @@ class DiscoApiTest {
         return response.result().get(0);
     }
 
-    private static void assertMajorVersion(MajorVersion actual, int majorVersion, String termOfSupport,
-            boolean maintained, boolean earlyAccessOnly, String releaseStatus, int versionsSize,
+    private static void assertMajorVersion(MajorVersion actual, int majorVersion, TermOfSupport termOfSupport,
+            boolean maintained, boolean earlyAccessOnly, ReleaseStatus releaseStatus, int versionsSize,
             String firstVersion, String lastVersion, String versionsHash) {
         assertThat(actual.majorVersion()).isEqualTo(majorVersion);
         assertThat(actual.termOfSupport()).isEqualTo(termOfSupport);
@@ -568,8 +587,9 @@ class DiscoApiTest {
     }
 
     private static boolean isValidMajorVersion(MajorVersion value) {
-        return value != null && value.majorVersion() > 0 && hasText(value.termOfSupport())
-                && value.maintained() != null && value.earlyAccessOnly() != null && hasText(value.releaseStatus())
+        return value != null && value.majorVersion() > 0 && isValidTermOfSupport(value.termOfSupport())
+                && value.maintained() != null && value.earlyAccessOnly() != null
+                && isValidReleaseStatus(value.releaseStatus())
                 && value.versions() != null && value.versions().stream().allMatch(DiscoApiTest::hasText);
     }
 
@@ -582,11 +602,14 @@ class DiscoApiTest {
     }
 
     private static boolean isValidPackage(DiscoPackage value) {
-        return value != null && hasText(value.id()) && hasText(value.archiveType()) && hasText(value.distribution())
+        return value != null && hasText(value.id()) && isValidArchiveType(value.archiveType())
+                && hasText(value.distribution())
                 && value.majorVersion() > 0 && hasText(value.javaVersion()) && hasText(value.distributionVersion())
-                && value.jdkVersion() > 0 && value.latestBuildAvailable() != null && hasText(value.releaseStatus())
-                && hasText(value.termOfSupport()) && hasText(value.operatingSystem()) && hasText(value.libCType())
-                && hasText(value.architecture()) && hasText(value.fpu()) && hasText(value.packageType())
+                && value.jdkVersion() > 0 && value.latestBuildAvailable() != null
+                && isValidReleaseStatus(value.releaseStatus()) && isValidTermOfSupport(value.termOfSupport())
+                && isValidOperatingSystemValue(value.operatingSystem()) && isValidLibCType(value.libCType())
+                && isValidArchitecture(value.architecture()) && isValidFpu(value.fpu())
+                && isValidPackageType(value.packageType())
                 && value.javafxBundled() != null && value.directlyDownloadable() != null && hasText(value.filename())
                 && value.links() != null && hasText(value.links().pkgInfoUri())
                 && hasText(value.links().pkgDownloadRedirect()) && value.freeUseInProduction() != null
@@ -643,6 +666,10 @@ class DiscoApiTest {
     private static boolean isValidOperatingSystem(OperatingSystem value) {
         return value != null && hasText(value.name()) && value.uiString() != null
                 && value.apiString() != null && value.libCType() != null;
+    }
+
+    private static boolean isValidOperatingSystemValue(OperatingSystem value) {
+        return value != null && hasText(value.apiString());
     }
 
     private static boolean isValidUpcomingRelease(UpcomingRelease value) {
