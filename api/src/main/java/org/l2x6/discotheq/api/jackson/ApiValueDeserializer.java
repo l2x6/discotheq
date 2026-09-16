@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: Copyright (c) 2026 Discotheq contributors as indicated by the @author tags
  *                                 SPDX-License-Identifier: Apache-2.0
  */
-package org.l2x6.discotheq.api.model;
+package org.l2x6.discotheq.api.jackson;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
@@ -13,6 +13,18 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
 import java.io.IOException;
+import org.l2x6.discotheq.api.model.ApiValue;
+import org.l2x6.discotheq.api.model.Architecture;
+import org.l2x6.discotheq.api.model.ArchiveType;
+import org.l2x6.discotheq.api.model.Bitness;
+import org.l2x6.discotheq.api.model.DiscoveryScope;
+import org.l2x6.discotheq.api.model.Fpu;
+import org.l2x6.discotheq.api.model.Latest;
+import org.l2x6.discotheq.api.model.LibCType;
+import org.l2x6.discotheq.api.model.OperatingSystem;
+import org.l2x6.discotheq.api.model.PackageType;
+import org.l2x6.discotheq.api.model.ReleaseStatus;
+import org.l2x6.discotheq.api.model.TermOfSupport;
 
 /** Deserializes API values represented either as supported-value objects or as API strings. */
 public final class ApiValueDeserializer extends JsonDeserializer<Object> implements ContextualDeserializer {

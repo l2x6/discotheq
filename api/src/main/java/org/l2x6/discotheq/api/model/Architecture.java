@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import java.util.Objects;
+import org.l2x6.discotheq.api.jackson.ApiValueDeserializer;
 
 @JsonDeserialize(using = ApiValueDeserializer.class)
 public interface Architecture extends ApiValue {
