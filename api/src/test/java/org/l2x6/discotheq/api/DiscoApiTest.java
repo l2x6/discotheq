@@ -94,7 +94,7 @@ class DiscoApiTest {
     private static final DiscoPackage ZULU_JDK = new DiscoPackage(
             PACKAGE_ID, KnownArchiveType.DMG, "zulu", 26, "26.0.2.1+1", "26.32.203", 26, true,
             KnownReleaseStatus.GA, KnownTermOfSupport.STS,
-            new OperatingSystemRecord("macos", "macos", "macos", null), KnownLibCType.LIBC,
+            new OperatingSystemRecord("MACOS", "macos", "macos", null), KnownLibCType.LIBC,
             KnownArchitecture.X64, KnownFpu.UNKNOWN, KnownPackageType.JDK, true, true,
             "zulu26.32.203-ca-fx-jdk26.0.2.1-macosx_x64.dmg",
             new PackageLinks("https://api.foojay.io/disco/v3.0/ids/" + PACKAGE_ID,
@@ -106,7 +106,7 @@ class DiscoApiTest {
     private static final DiscoPackage CORRETTO_JDK = new DiscoPackage(
             "475391b85d3045ee4bb5f4bbac2318f4", KnownArchiveType.DEB, "corretto", 8, "8.0.222+10",
             "8.222.10", 8, false, KnownReleaseStatus.GA, KnownTermOfSupport.LTS,
-            new OperatingSystemRecord("linux", "linux", "linux", null), KnownLibCType.GLIBC,
+            new OperatingSystemRecord("LINUX", "linux", "linux", null), KnownLibCType.GLIBC,
             KnownArchitecture.ARM64, KnownFpu.UNKNOWN, KnownPackageType.JDK, true, true,
             "java-1.8.0-amazon-corretto-jdk_8.222.10-2_arm64.deb",
             new PackageLinks("https://api.foojay.io/disco/v3.0/ids/475391b85d3045ee4bb5f4bbac2318f4",
@@ -116,7 +116,7 @@ class DiscoApiTest {
     private static final DiscoPackage GRAALVM_JDK = new DiscoPackage(
             "1da4c6f7907e2b64bf188d67b2f4dadd", KnownArchiveType.ZIP, "graalvm", 17, "17.0.7", "17.0.7",
             17, false, KnownReleaseStatus.GA, KnownTermOfSupport.LTS,
-            new OperatingSystemRecord("windows", "windows", "windows", null), KnownLibCType.C_STD_LIB,
+            new OperatingSystemRecord("WINDOWS", "windows", "windows", null), KnownLibCType.C_STD_LIB,
             KnownArchitecture.X64, KnownFpu.UNKNOWN, KnownPackageType.JDK, false, true,
             "graalvm-jdk-17.0.7_windows-x64_bin.zip",
             new PackageLinks("https://api.foojay.io/disco/v3.0/ids/1da4c6f7907e2b64bf188d67b2f4dadd",
@@ -126,7 +126,7 @@ class DiscoApiTest {
     private static final DiscoPackage ZULU_JRE = new DiscoPackage(
             "b9ab5073dfa6c3b74327ead131f76130", KnownArchiveType.ZIP, "zulu", 26, "26.0.2.1+1", "26.32.203",
             26, true, KnownReleaseStatus.GA, KnownTermOfSupport.STS,
-            new OperatingSystemRecord("windows", "windows", "windows", null), KnownLibCType.C_STD_LIB,
+            new OperatingSystemRecord("WINDOWS", "windows", "windows", null), KnownLibCType.C_STD_LIB,
             KnownArchitecture.X64, KnownFpu.UNKNOWN, KnownPackageType.JRE, false, true,
             "zulu26.32.203-ca-jre26.0.2.1-win_x64.zip",
             new PackageLinks("https://api.foojay.io/disco/v3.0/ids/b9ab5073dfa6c3b74327ead131f76130",
@@ -355,9 +355,9 @@ class DiscoApiTest {
                         "[\"aarch64\",\"64\",\"tar.gz\",\"hard_float\",\"per_distro\",\"glibc\",\"linux\",\"jdk\",\"ga\",\"lts\",\"public\"]");
         assertThat(mapper.readValue("\"ga\"", ReleaseStatus.class)).isEqualTo(KnownReleaseStatus.GA);
         assertThat(mapper.readValue("\"linux\"", OperatingSystem.class))
-                .isEqualTo(new OperatingSystemRecord("linux", "linux", "linux", null));
+                .isEqualTo(new OperatingSystemRecord("LINUX", "linux", "linux", null));
         assertThat(mapper.readValue("\"preview\"", ReleaseStatus.class))
-                .isEqualTo(new ReleaseStatusRecord("preview", "preview", "preview"));
+                .isEqualTo(new ReleaseStatusRecord("PREVIEW", "preview", "preview"));
     }
 
     @Test

@@ -39,6 +39,15 @@ public interface PackageType extends ApiValue {
             this.value = new PackageTypeRecord(name, uiString, apiString);
         }
 
+        public static KnownPackageType fromApiString(String value) {
+            for (KnownPackageType known : values()) {
+                if (known.apiString().equalsIgnoreCase(value)) {
+                    return known;
+                }
+            }
+            return null;
+        }
+
         @Override
         public String uiString() {
             return value.uiString();

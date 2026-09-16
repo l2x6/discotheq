@@ -42,6 +42,15 @@ public interface Latest extends ApiValue {
             this.value = new LatestRecord(name, uiString, apiString);
         }
 
+        public static KnownLatest fromApiString(String value) {
+            for (KnownLatest known : values()) {
+                if (known.apiString().equalsIgnoreCase(value)) {
+                    return known;
+                }
+            }
+            return null;
+        }
+
         @Override
         public String uiString() {
             return value.uiString();

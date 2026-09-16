@@ -40,6 +40,15 @@ public interface TermOfSupport extends ApiValue {
             this.value = new TermOfSupportRecord(name, uiString, apiString);
         }
 
+        public static KnownTermOfSupport fromApiString(String value) {
+            for (KnownTermOfSupport known : values()) {
+                if (known.apiString().equalsIgnoreCase(value)) {
+                    return known;
+                }
+            }
+            return null;
+        }
+
         @Override
         public String uiString() {
             return value.uiString();
